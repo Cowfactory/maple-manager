@@ -1,0 +1,23 @@
+{
+  "name": "maple-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "Henry H",
+  "license": "MIT",
+  "dependencies": {
+    "morgan": "^1.9.1",
+    "serve-favicon": "^2.5.0",
+    "bcrypt": "^3.0.2",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
+    "express-rate-limit": "^3.3.2",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.3.14"
+  }
+}
