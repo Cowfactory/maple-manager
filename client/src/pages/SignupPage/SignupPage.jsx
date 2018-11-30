@@ -123,8 +123,7 @@ class SignupPage extends Component {
                         passHasPunc: false
                     })
                 } else {
-                    console.log("accoutn created")
-                    localStorage.setItem('mernToken', result.data.token)
+                    localStorage.setItem('mapleToken', result.data.token)
                     this.props.handleSignup(result.data)
                     this.setState({
                         redirectToHome: true
@@ -132,7 +131,6 @@ class SignupPage extends Component {
                 }
             }).catch(err => {
                 // This block catches the rate limit errors
-                console.log(err);
                 this.setState({
                     error: {
                         type: 'rate_error',

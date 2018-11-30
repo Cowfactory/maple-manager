@@ -41,9 +41,7 @@ class LoginPage extends Component {
                     error: result.data
                 })
             } else {
-                console.log("Successfully verified email/pass via api via LoginPage::handleSubmit()")
-                console.log("aaa ", result.data);
-                localStorage.setItem('mernToken', result.data.token)
+                localStorage.setItem('mapleToken', result.data.token)
                 this.props.handleLogin(result.data)
                 this.setState({
                     error: null,
@@ -52,7 +50,6 @@ class LoginPage extends Component {
             }
         }).catch(err => {
             // This block catches the rate limit errors
-            console.log(err);
             this.setState({
                 error: {
                     type: 'rate_error',

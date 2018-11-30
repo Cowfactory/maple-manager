@@ -19,7 +19,12 @@ const userSchema = new mongoose.Schema({
         required: [true, 'You must enter an email'],
         minlength: [5, 'Email must be between 5 and 99 characters'],
         maxlength: [99, 'Email must be between 5 and 99 characters']
-    }
+    },
+    characters: [
+        {type: mongoose.Schema.Types.ObjectId, ref: 'Character'}
+    ]
+}, {
+    timestamps: true
 });
 
 // This returns a user object without a password

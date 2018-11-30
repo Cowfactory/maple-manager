@@ -77,7 +77,6 @@ class App extends Component {
         // Try to set token to local storage
         if (tokenService.setToken(data.token)) {
             // Lift token to state
-            console.log("Logging in - ",data);
             this.setState({
                 token: data.token,
                 user: data.user
