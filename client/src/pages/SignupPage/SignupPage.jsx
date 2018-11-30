@@ -154,7 +154,7 @@ class SignupPage extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <div className={styles.inputBox}>
                         <div className={styles.leftCol}>
-                            <label htmlFor="s-name">Name:</label>
+                            <label htmlFor="s-name">Username:</label>
                         </div>
                         <div className={styles.rightCol}>
                             <input name="s-name" type='text' value={this.state.name} onChange={this.handleNameChange} />

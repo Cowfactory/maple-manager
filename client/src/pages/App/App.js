@@ -27,6 +27,7 @@ class App extends Component {
 
     /*--- Lifecycle Methods ---*/
     componentDidMount() {
+        this.setUserStateFromLocalToken();
     }
 
     render() {
@@ -84,9 +85,9 @@ class App extends Component {
         }
     }
 
-    challengeAuthStatus = () => {
+    setUserStateFromLocalToken = async () => {
         try {
-            let result = tokenService.checkForLocalToken();
+            let result = await tokenService.authMeFromLocalToken();
             if(result) {
                 // Token found; lift to state
                 this.setState({
@@ -102,6 +103,7 @@ class App extends Component {
             }
         } catch(err) {
             // Authentication challenge failed; reset state + include error msg
+            console.log("auth challenge failed");
             this.setState({
                 token: '',
                 user: null,

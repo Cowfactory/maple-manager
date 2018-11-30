@@ -16,34 +16,35 @@ function removeToken() {
     localStorage.removeItem('mapleToken');
 }
 
-function authMeFromToken() {
-    // Look in local storage for the token
-    let token = localStorage.getItem('mapleToken')
-    if (!token || token === 'undefined') {
-        removeToken();
-        return false;
-    } 
-
-    // Token found in localStorage - send it to the back for verification
-    axios.post('/auth/me/from/token', {token})
-        .then(result => {
-            if (result.data.type !== 'success') {
-                throw new Error(result.data.message);
-            } else {
-                // Success - Put the token in localStorage
-                console.log("Auth me success - ", result)
-                localStorage.setItem('mapleToken', result.data.token)
-                let ret = {
-                    token: result.data.token,
-                    user: result.data.user
+function authMeFromLocalToken() {
+    return new Promise((resolve, reject) => {
+        // Look in local storage for the token
+        let token = localStorage.getItem('mapleToken')
+        if (!token || token === 'undefined') {
+            removeToken();
+            reject('No token in localStorage');
+        } 
+    
+        // Token found in localStorage - send it to the back for verification
+        axios.post('/auth/me/from/token', {token})
+            .then(result => {
+                if (result.data.type !== 'success') {
+                    reject(result.data.message);
+                } else {
+                    // Success - Put the token in localStorage
+                    localStorage.setItem('mapleToken', result.data.token)
+                    let ret = {
+                        token: result.data.token,
+                        user: result.data.user
+                    }
+                    resolve(ret);
                 }
-                return ret;
-            }
+        })
     })
 }
 
 export default {  
     setToken,
     removeToken,
-    authMeFromToken
+    authMeFromLocalToken
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import CharacterCreateForm from '../../components/CharacterCreateForm/CharacterCreateForm';
 
 const AccountPage = (props) => {
     return (
@@ -6,6 +7,7 @@ const AccountPage = (props) => {
             {props.NavBar}
             <br />
             Account Page
+            <CharacterCreateForm />
             {}
         </div>
     );
