@@ -78,7 +78,7 @@ router.post('/login', (req, res) => {
             res.json({
                 type: 'auth_error',
                 status: 401,
-                message: 'Account not found'
+                message: 'Email or password is incorrect'
             });
         }
     })

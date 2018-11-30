@@ -1,0 +1,25 @@
+.Login {
+    display: inline-block;
+    width: 25vw;
+    background-color: lightgreen;
+    padding: 1rem;
+    margin: 1rem;
+}
+  
+.inputBox {
+    margin: 0.4rem;
+}
+  
+.leftCol {
+    display: inline-block;
+    text-align: right;
+    padding: 0.3em;
+    width: 22%;
+}
+
+.rightCol {
+    display: inline-block;
+    text-align: left;
+    padding: 0.3em;
+    width: 35%;
+}
