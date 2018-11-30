@@ -55,14 +55,19 @@ router.post('/login', (req, res) => {
         if (user) {
             // If there is a user, check their entered password against the DB hash
             if (user.authenticated(req.body.password)) {
+                // Strip password
+                let userNoPass = Object.assign({}, user.toObject());
+                delete userNoPass.password;
+                
                 // if it matches: log them in (sign a token)
-                var token = jwt.sign(user.toObject(), process.env.JWT_SECRET, {
+                var token = jwt.sign(userNoPass, process.env.JWT_SECRET, {
                     expiresIn: 60 * 60 * 24
                 });
+
                 res.json({
                     type: 'success',
                     status: 200,
-                    user,
+                    user: userNoPass,
                     token
                 });
             } else {
@@ -115,11 +120,14 @@ router.post('/me/from/token', (req, res) => {
                             error: err
                         });
                     } else {
+                        // Strip password
+                        let userNoPass = Object.assign({}, user.toObject());
+                        delete userNoPass.password;
                         // send the user and the token back to the React app
                         res.json({
                             type: 'success',
                             status: 200,
-                            user,
+                            user: userNoPass,
                             token
                         });
                     }

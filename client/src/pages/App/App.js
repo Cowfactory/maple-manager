@@ -18,13 +18,11 @@ import AccountPage from '../AccountPage/AccountPage';
 class App extends Component {
     constructor(props) {
         super(props)
-        this.state = Object.assign({
+        this.state = {
             token: '',
             user: null,
             error: null
-        })
-
-        // handleLogout = handleLogout.bind(this);
+        };
     }
 
     /*--- Lifecycle Methods ---*/
@@ -39,7 +37,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path='/' render={() =>
                             <MainPage 
-                                NavBar={<NavBar user={this.state.user} handleLogout={this.handleLogout} />}
+                                NavBar={nav}
                             />
                         } />
                         <Route exact path='/login' render={() =>
@@ -79,6 +77,7 @@ class App extends Component {
         // Try to set token to local storage
         if (tokenService.setToken(data.token)) {
             // Lift token to state
+            console.log("Logging in - ",data);
             this.setState({
                 token: data.token,
                 user: data.user
@@ -112,7 +111,6 @@ class App extends Component {
         }
     }
     handleLogout = () => {
-        console.log("hello");
         tokenService.removeToken();
         // Remove the user info from the state
         this.setState({

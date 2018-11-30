@@ -62,7 +62,7 @@ class SignupPage extends Component {
                 passHasDig: false
             })
         }
-        if (e.target.value.match(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g)) {
+        if (e.target.value.match(/[.,/#!$%^&*;:{}=\-_`~()]/g)) {
             this.setState({
                 passHasPunc: true
             })

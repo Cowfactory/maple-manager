@@ -1,11 +1,12 @@
 import axios from 'axios';
-import AuthError from '../utils/AuthError';
 
 function setToken(token) {
     if (token) {
+        console.log("Saving token in localStorage via tokenService::setToken()")
         localStorage.setItem('mernToken', token);
         return true;
     } else {
+        console.log("No token found in storage via tokenService::setToken()")
         removeToken();
         return false;
     }
@@ -15,7 +16,7 @@ function removeToken() {
     localStorage.removeItem('mernToken');
 }
 
-function checkForLocalToken() {
+function authMeFromToken() {
     // Look in local storage for the token
     let token = localStorage.getItem('mernToken')
     if (!token || token === 'undefined') {
@@ -27,10 +28,10 @@ function checkForLocalToken() {
     axios.post('/auth/me/from/token', {token})
         .then(result => {
             if (result.data.type !== 'success') {
-                console.log(result.data);
-                throw new AuthError('Authentication challenge failed');
+                throw new Error(result.data.message);
             } else {
                 // Success - Put the token in localStorage
+                console.log("Auth me success - ", result)
                 localStorage.setItem('mernToken', result.data.token)
                 let ret = {
                     token: result.data.token,
@@ -44,5 +45,5 @@ function checkForLocalToken() {
 export default {  
     setToken,
     removeToken,
-    checkForLocalToken
+    authMeFromToken
 }

@@ -41,6 +41,8 @@ class LoginPage extends Component {
                     error: result.data
                 })
             } else {
+                console.log("Successfully verified email/pass via api via LoginPage::handleSubmit()")
+                console.log("aaa ", result.data);
                 localStorage.setItem('mernToken', result.data.token)
                 this.props.handleLogin(result.data)
                 this.setState({
