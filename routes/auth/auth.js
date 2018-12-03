@@ -32,15 +32,18 @@ router.post('/signup', (req, res) => {
                         error: err
                     });
                 } else {
+                    // Strip password
+                    let userNoPass = Object.assign({}, user.toObject());
+                    delete userNoPass.password;
                     // Log the user in (sign a new token)
-                    var token = jwt.sign(user.toObject(), process.env.JWT_SECRET, {
+                    var token = jwt.sign(userNoPass, process.env.JWT_SECRET, {
                         expiresIn: 60 * 60 * 24
                     });
                     // Return user and token to React app
                     res.json({
                         type: 'success',
                         status: 200,
-                        user,
+                        user: userNoPass,
                         token
                     });
                 }
