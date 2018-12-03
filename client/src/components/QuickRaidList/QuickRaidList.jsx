@@ -19,19 +19,19 @@ class QuickRaidList extends Component {
         return (
             <div className={styles.QuickRaidList}>
                 <div className={styles.listSegment}>
-                    <img src={horntailImg}></img>
+                    <img src={horntailImg} alt="horntail"></img>
                     <p>Horntail</p>
-                    <Link to="/">New Run Btn</Link>
+                    <Link to="/">New Run</Link>
                 </div>
                 <div className={styles.listSegment}>
-                    <img src={zakumImg}></img>
+                    <img src={zakumImg} alt="zakum"></img>
                     <p>Zakum</p>
-                    <Link to="/">New Run Btn</Link>
+                    <Link to="/">New Run</Link>
                 </div>
                 <div className={styles.listSegment}>
-                    <img src={customImg}></img>
+                    <img src={customImg} alt="custom boss"></img>
                     <p>Custom Run</p>
-                    <Link to="/">New Run Btn</Link>
+                    <Link to="/">New Run</Link>
                 </div>
             </div>
         )
