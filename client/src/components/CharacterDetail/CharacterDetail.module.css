@@ -1,0 +1,27 @@
+.CharacterDetail {
+    display: flex;
+    /* background-color: red; */
+    border: 1px dotted black;  
+}
+
+.leftDetail {
+    border: 1px dotted blue;
+}
+
+.rightDetail {
+    border: 1px dotted blue;
+    display: flex;
+    flex-direction: column;
+}
+
+.ign {
+
+}
+
+.class {
+
+}
+
+.level {
+
+}

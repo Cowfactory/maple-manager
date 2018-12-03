@@ -53,11 +53,14 @@ class App extends Component {
                                 handleSignup={this.handleLoginOrSignup}
                             />
                         } />
-                        <Route exact path='/account' render={() =>
-                            <AccountPage
-                                NavBar={nav}
-                            />
-                        } />
+                        <Route path='/account' render={() => (
+                            this.state.user ?
+                                <AccountPage 
+                                    NavBar={nav}
+                                    user={this.state.user}
+                                /> :
+                                <Redirect to='/login' />
+                        )} />
                         <Route exact path='/404' render={() => 
                             <NoMatchPage 
                                 NavBar={nav}

@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const router = express.Router();
-const User = require("../db/models/User");
+const User = require("../../db/models/User");
 const jwt = require('jsonwebtoken');
 
 // Route for signing up (creating a new account)

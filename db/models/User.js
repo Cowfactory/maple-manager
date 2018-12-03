@@ -1,6 +1,25 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
+// Character Schema subdocument
+const characterSchema = new mongoose.Schema({
+    ign: {
+        type: String,
+        required: [true, 'You must enter an IGN'],
+        minlength: [4, 'Name must be between 4 and 12 characters'],
+        maxlength: [12, 'Name must be between 4 and 12 characters'],
+    },
+    user_id: {
+        type: String,
+        required: true
+    },
+    class: String,
+    level: Number
+
+}, {
+    timestamps: true
+});
+
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -20,12 +39,11 @@ const userSchema = new mongoose.Schema({
         minlength: [5, 'Email must be between 5 and 99 characters'],
         maxlength: [99, 'Email must be between 5 and 99 characters']
     },
-    characters: [
-        {type: mongoose.Schema.Types.ObjectId, ref: 'Character'}
-    ]
+    characters: [characterSchema]
 }, {
     timestamps: true
 });
+
 
 // This returns a user object without a password
 userSchema.set('toObject', {
@@ -33,7 +51,8 @@ userSchema.set('toObject', {
         let returnJson = {
             _id: ret._id,
             email: ret.email,
-            name: ret.name
+            name: ret.name,
+            characters: ret.characters
         }
         return returnJson;
     }

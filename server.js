@@ -21,10 +21,15 @@ app.use(express.urlencoded({ extended: false }));
 // Mount auth routes with rate limiting middleware
 // app.use('/auth/login', require('./routes/middleware/loginLimiter'));
 // app.use('/auth/signup', require('./routes/middleware/signupLimiter'));
-app.use('/auth', require('./routes/auth'));
+app.use('/auth', require('./routes/auth/auth'));
+
+// Mount API routes
+app.use('/users', require('./routes/api/users'))
+// app.use('/raids', require('./routes/api/raids'))
+// app.use('/items', require('./routes/api/items'))
 
 // This line uses the express-jwt to protect the routes
-app.use('/locked', expressJWT({secret: process.env.JWT_SECRET}).unless({method: 'POST'}), require('./routes/locked'));
+app.use('/locked', expressJWT({secret: process.env.JWT_SECRET}).unless({method: 'POST'}), require('./routes/auth/locked'));
 
 // Catch-all route - Send react app
 app.use('/*', (req, res) => {

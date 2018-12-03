@@ -14,8 +14,8 @@ const NavBar = (props) => {
                 </> : 
                 <>
                     <Link to='/'>Home</Link>&nbsp;
-                    <Link to='/login'>Log in</Link>&nbsp;
                     <Link to='/signup'>Sign up</Link>&nbsp;
+                    <Link to='/login'>Log in</Link>&nbsp;
                 </>}
         </header>
     );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import ErrorPanel from '../../components/ErrorPanel/ErrorPanel';
 import styles from './LoginPage.module.css';
 
@@ -13,23 +13,14 @@ class LoginPage extends Component {
             error: null,
             redirectToHome: false
         }
-        this.handleEmailChange = this.handleEmailChange.bind(this)
-        this.handlePasswordChange = this.handlePasswordChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    handleEmailChange(e) {
-        this.setState({
-            email: e.target.value
-        })
-    }
-    handlePasswordChange(e) {
-        this.setState({
-            password: e.target.value
-        })
-    }
+    // Form Controls
+    handleEmailChange = (e) => this.setState({ email: e.target.value });
+    handlePasswordChange = (e) => this.setState({ password: e.target.value });
 
-    handleSubmit(e) {
+    // Form Submit
+    handleSubmit = (e) => {
         e.preventDefault()
         axios.post('/auth/login', {
             email: this.state.email,
@@ -63,7 +54,7 @@ class LoginPage extends Component {
     }
 
     render() {
-        if(this.state.redirectToHome) return <Redirect to="/" />
+        if (this.state.redirectToHome) return <Redirect to="/" />
         let errorPanel = (this.state.error) ? <ErrorPanel error={this.state.error} /> : ''
         return (
             <div className="LoginPage">
