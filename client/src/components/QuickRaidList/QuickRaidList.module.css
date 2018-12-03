@@ -1,0 +1,16 @@
+.QuickRaidList {
+
+}
+
+.listSegment {
+    display: flex;
+    flex-direction: row;   
+    align-content: center;
+    justify-content: space-between;
+    border: 1px dotted black;
+}
+
+.listSegment img {
+    width: 10%;
+    height: 10%;
+}

@@ -1,0 +1,13 @@
+.MainPage {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+
+.left, .right {
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+}
+

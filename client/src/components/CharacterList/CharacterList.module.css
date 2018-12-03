@@ -1,7 +1,8 @@
 .CharacterList {
-    
+    display: flex;
+    flex-direction: column;
 }
 
-.myCharactersListSegment {
+.myCharacterListSegment {
 
 }

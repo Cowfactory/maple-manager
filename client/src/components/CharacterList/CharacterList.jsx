@@ -22,31 +22,29 @@ class CharacterList extends Component {
     render() {
         return (
             <div className={styles.CharacterList}>
-                <ul>
-                    {this.props.user.characters.map((character, idx) =>
-                        <li key={idx} className={styles.myCharactersListSegment}>
-                            <CharacterDetail 
-                                character={character}
-                                deleteCharacter={this.props.deleteCharacter}
-                            />
-                        </li>
-                    )}
-                    {this.state.createFormVisible ?
-                        <li className={styles.myCharactersListSegment}>
-                            <button type="button" onClick={this.toggleFormVisible}>
-                                Hide form
-                            </button>
-                            <CharacterCreateForm />
+                {this.props.user.characters.map(character =>
+                    <div className={styles.myCharactersListSegment}>
+                        <CharacterDetail 
+                            character={character}
+                            deleteCharacter={this.props.deleteCharacter}
+                        />
+                    </div>
+                )}
+                {this.state.createFormVisible ?
+                    <div className={styles.myCharactersListSegment}>
+                        <button type="button" onClick={this.toggleFormVisible}>
+                            Hide form
+                        </button>
+                        <CharacterCreateForm />
 
-                        </li>
-                        :
-                        <li className={styles.myCharactersListSegment}>
-                            <button type="button" onClick={this.toggleFormVisible}>
-                                Add a char
-                            </button>
-                        </li>
-                    }
-                </ul>
+                    </div>
+                    :
+                    <div className={styles.myCharactersListSegment}>
+                        <button type="button" onClick={this.toggleFormVisible}>
+                            Add a char
+                        </button>
+                    </div>
+                }
             </div>
         )
     }
