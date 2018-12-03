@@ -1,3 +1,29 @@
-header {
-    font-size: 18
+.NavBar {
+    width: 100vw;
+    min-height: 5vh;
+    display: flex;
+    align-items: center;
+    background-color: #1a6ecc;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.navItem {
+    height: 100%;
+    width: 100%;
+    color: #ffffff;
+    text-decoration: none;
+
+}
+
+.navItem:hover {
+    background-color: #1967be;
+}
+
+.left {
+
+}
+
+.right {
+    margin-left: auto;
 }

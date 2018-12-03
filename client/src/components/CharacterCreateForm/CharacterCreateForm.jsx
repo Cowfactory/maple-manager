@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ErrorPanel from '../ErrorPanel/ErrorPanel';
 import axios from 'axios';
-import Redirect from 'react-router-dom/Redirect';
 
 class CharacterCreateForm extends Component {
     constructor(props) {
@@ -35,8 +34,10 @@ class CharacterCreateForm extends Component {
             level: this.state.level
         }).then(result => {
             if(result.type === 'success') {
-                // return <Redirect to='/account' />
-                this.props.history.push('/account')
+                // // return <Redirect to='/account' />
+                // this.props.history.push('/account')
+
+                // Nothing here for now.
             }
 
         }).catch(err => {

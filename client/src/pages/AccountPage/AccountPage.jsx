@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import CharacterCreateForm from '../../components/CharacterCreateForm/CharacterCreateForm.jsx';
 import CharacterList from '../../components/CharacterList/CharacterList';
 import axios from 'axios';
+import styles from './AccountPage.module.css';
 
 class AccountPage extends Component {
     constructor(props) {
@@ -11,6 +11,8 @@ class AccountPage extends Component {
         }
     }
 
+    /*--- Lifecycle Methods ---*/
+    // Load the character list via API call on-load
     componentDidMount() {
         axios.get(`/api/users/${this.props.user._id}/characters`)
             .then(characters => {
@@ -20,22 +22,32 @@ class AccountPage extends Component {
                 console.log(err);
             })
     }
+
+
+
+    /*--- Callback functions ---*/
+    deleteCharacter = (e) => {
+        // check where character state should be
+        console.log("test delte character");
+    }
+
     render() {
         return (
-            <div className='AccountPage'>
+            <>
                 {this.props.NavBar}
-                Account Page
-                <div className='left'>
-                    <CharacterList 
-                        user={this.props.user}
-                    />
+                <div className={styles.AccountPage}>
+                    <div className={styles.left}>
+                        <h1>My Runs</h1>
+                    </div>
+                    <div className={styles.right}>
+                        <h1>My Characters</h1>
+                        <CharacterList
+                            user={this.props.user}
+                            deleteCharacter={this.deleteCharacter}
+                        />
+                    </div>
                 </div>
-                <div className='right'>
-                    <CharacterCreateForm 
-                        user={this.props.user}
-                    />
-                </div>
-            </div>
+            </>
         );
     }
 };

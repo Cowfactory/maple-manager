@@ -5,7 +5,7 @@ const MainPage = (props) => {
         <div className='MainPage'>
             {props.NavBar}
             <br />
-            Main Page - Welcome!
+            <div>Main Page - Welcome!</div>
     </div>
     );
 };

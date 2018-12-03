@@ -77,6 +77,11 @@ class App extends Component {
     handleSomeClick = (e) => {
         //Hello
     }
+    
+    deleteCharacter = (e) => {
+        
+    }
+
     handleLoginOrSignup = (data) => {
         // Try to set token to local storage
         if (tokenService.setToken(data.token)) {
@@ -114,6 +119,7 @@ class App extends Component {
             })
         }
     }
+
     handleLogout = () => {
         tokenService.removeToken();
         // Remove the user info from the state
