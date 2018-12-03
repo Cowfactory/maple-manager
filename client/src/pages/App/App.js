@@ -13,6 +13,7 @@ import tokenService from '../../utils/tokenService';
 import NavBar from '../../components/NavBar/NavBar'
 import './App.css';
 import AccountPage from '../AccountPage/AccountPage';
+import CreateRaidPage from '../CreateRaidPage/CreateRaidPage';
 
 
 class App extends Component {
@@ -61,9 +62,9 @@ class App extends Component {
                                 /> :
                                 <Redirect to='/login' />
                         )} />
-                        <Route path='/raids/new' render={() => (
+                        <Route path='/createRaid' render={() => (
                             this.state.user ?
-                                <AccountPage 
+                                <CreateRaidPage 
                                     NavBar={nav}
                                     user={this.state.user}
                                 /> :

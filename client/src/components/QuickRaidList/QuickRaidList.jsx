@@ -21,17 +21,17 @@ class QuickRaidList extends Component {
                 <div className={styles.listSegment}>
                     <img src={horntailImg} alt="horntail"></img>
                     <p>Horntail</p>
-                    <Link to="/">New Run</Link>
+                    <Link to="/createRaid">New Run</Link>
                 </div>
                 <div className={styles.listSegment}>
                     <img src={zakumImg} alt="zakum"></img>
                     <p>Zakum</p>
-                    <Link to="/">New Run</Link>
+                    <Link to="/createRaid">New Run</Link>
                 </div>
                 <div className={styles.listSegment}>
                     <img src={customImg} alt="custom boss"></img>
                     <p>Custom Run</p>
-                    <Link to="/">New Run</Link>
+                    <Link to="/createRaid">New Run</Link>
                 </div>
             </div>
         )
