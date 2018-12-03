@@ -1,7 +1,15 @@
 const mongoose = require('mongoose');
 
 const raidGroupSchema = new mongoose.Schema({
-    name: {type: String, required: true},
+    name: {
+        required: true,
+        type: String
+    },
+    creator: {
+        required: true,
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User'
+    },
     raids: [
         {type: mongoose.Schema.Types.ObjectId, ref: 'Raid'}
     ]
@@ -9,6 +17,6 @@ const raidGroupSchema = new mongoose.Schema({
     timestamps: true
 })
 
-const RaidGroup = mongoose.model('Raid', raidGroupSchema);
+const RaidGroup = mongoose.model('RaidGroup', raidGroupSchema);
 
 module.exports = RaidGroup;

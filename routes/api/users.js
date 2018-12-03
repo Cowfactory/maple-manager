@@ -6,7 +6,7 @@ const User = require("../../db/models/User");
 router.get('/:id/characters', (req, res) => {
     User.findById(req.params.id)
         .then(user => {
-            res.json({
+            res.status(200).json({
                 characters: user.characters
             })
         })
@@ -28,7 +28,7 @@ router.post('/:id/characters', (req, res) => {
             };
             user.characters.push(newCharacter);
             user.save();
-            res.status(200).send('New character added to user')
+            res.status(201).send('New character added to user')
         })
         .catch(err => {
             res.status(404).json(err);

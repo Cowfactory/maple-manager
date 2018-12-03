@@ -11,6 +11,7 @@ const NavBar = (props) => {
                     <div className={styles.left}>
                         <span className={styles.navItem}>{props.user.name}</span>&nbsp;|&nbsp;
                         <Link className={styles.navItem} to='/'>Home</Link>&nbsp;
+                        <Link className={styles.navItem} to='/groups'>Groups</Link>&nbsp;
                     </div>
                     <div className={styles.right}>
                         <Link className={styles.navItem} to='/account'>My Account</Link>&nbsp;
@@ -22,6 +23,7 @@ const NavBar = (props) => {
                 <>  
                     <div className={styles.left}>
                         <Link className={styles.navItem} to='/'>Home</Link>&nbsp;
+                        <Link className={styles.navItem} to='/groups'>Groups</Link>&nbsp;
                     </div>
                     <div className={styles.right}>
                         <Link className={styles.navItem} to='/signup'>Sign up</Link>&nbsp;

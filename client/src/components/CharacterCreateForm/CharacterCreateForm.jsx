@@ -27,7 +27,7 @@ class CharacterCreateForm extends Component {
     // Form Submit
     handleSubmit = (e) => {
         e.preventDefault();
-        axios.post(`/users/${this.props.user._id}/characters`, {
+        axios.post(`/api/users/${this.props.user._id}/characters`, {
             ign: this.state.ign,
             user_id: this.props.user._id,
             class: this.state.class,
@@ -66,7 +66,6 @@ class CharacterCreateForm extends Component {
                     <div>
                         <label htmlFor="l-class">Class:</label>
                         <select name="l-class" value={this.state.class} onChange={this.handleClassChange}>
-
                             <option value="Bow Master">Bow Master</option>
                             <option value="Marksman">Marksman</option>
                             <option value="Arch Mage (I/L)">Arch Mage (I/L)</option>

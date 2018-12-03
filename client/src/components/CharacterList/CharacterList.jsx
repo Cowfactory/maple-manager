@@ -22,8 +22,8 @@ class CharacterList extends Component {
     render() {
         return (
             <div className={styles.CharacterList}>
-                {this.props.user.characters.map(character =>
-                    <div className={styles.myCharactersListSegment}>
+                {this.props.user.characters.map((character, idx) =>
+                    <div key={idx} className={styles.myCharactersListSegment}>
                         <CharacterDetail 
                             character={character}
                             deleteCharacter={this.props.deleteCharacter}

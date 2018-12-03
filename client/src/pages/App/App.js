@@ -14,6 +14,7 @@ import NavBar from '../../components/NavBar/NavBar'
 import './App.css';
 import AccountPage from '../AccountPage/AccountPage';
 import CreateRaidPage from '../CreateRaidPage/CreateRaidPage';
+import RaidGroupsPage from '../RaidGroupsPage/RaidGroupsPage';
 
 
 class App extends Component {
@@ -61,6 +62,12 @@ class App extends Component {
                                     user={this.state.user}
                                 /> :
                                 <Redirect to='/login' />
+                        )} />
+                        <Route path='/groups' render={() => (
+                            <RaidGroupsPage 
+                                NavBar={nav}
+                                user={this.state.user}
+                            />
                         )} />
                         <Route path='/createRaid' render={() => (
                             this.state.user ?

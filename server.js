@@ -24,7 +24,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/auth', require('./routes/auth/auth'));
 
 // Mount API routes
-app.use('/users', require('./routes/api/users'))
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/raidgroups', require('./routes/api/raidgroups'));
 // app.use('/raids', require('./routes/api/raids'))
 // app.use('/items', require('./routes/api/items'))
 

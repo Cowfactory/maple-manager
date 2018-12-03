@@ -1,0 +1,12 @@
+.RaidGroupsPage {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+
+.left, .right {
+    width: 40%;
+    display: flex;
+    flex-direction: column
+}
