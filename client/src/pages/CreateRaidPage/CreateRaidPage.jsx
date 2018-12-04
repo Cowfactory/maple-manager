@@ -8,9 +8,9 @@ class CreateRaidPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            raidGroups: [],
             raidParticipants: [],
             // allUsers: [],
+            allRaidGroups: [],
             allCharacters: [],
             currentlySelectedCharacter: "",
             boss: null,
@@ -21,38 +21,27 @@ class CreateRaidPage extends Component {
     /*--- Lifecycle Methods ---*/
     componentDidMount() {
         // Get list of raid groups
-        axios.get('/api/raidgroups')
-            .then(response => {
-                if (response.data.type !== 'success') {
-                    // failure
-                } else {
-                    this.setState({
-                        raidGroups: response.data.groups
-                    })
-                }
-            })
+        Promise.all([axios.get('/api/raidgroups'), axios.get('/api/users')])
+            .then(responses => {
+                let raidGroups = responses[0].data.groups;
+                let users = responses[1].data.users;
 
-        // Get list of users
-        axios.get('/api/users')
-            .then(response => {
-                if (!response) {
-                    console.log("failed to get users")
-                    // failure
-                } else {
-                    let allCharacters = [];
-                    // get every character from every user into arr
-                    response.data.users.forEach(user => {
-                        user.characters.forEach(char => {
-                            allCharacters.push(char);
-                        })
+                let allCharacters = [];
+                // get every character from every user into arr
+                users.forEach(user => {
+                    user.characters.forEach(character => {
+                        allCharacters.push(character);
                     })
-                    // let allUsers = response.data.users;
-                    let currentlySelectedCharacter = allCharacters[0];
-                    this.setState({
-                        allCharacters: allCharacters,
-                        currentlySelectedCharacter: currentlySelectedCharacter
-                    })
-                }
+                })
+
+                this.setState({
+                    allRaidGroups: raidGroups,
+                    allCharacters: allCharacters,
+                    currentlySelectedCharacter: allCharacters[0]
+                })
+            }).catch(err => {
+                //Failure to get data
+                console.log(err);
             })
     }
 
@@ -78,11 +67,12 @@ class CreateRaidPage extends Component {
     handleAddParticipant = (e) => {
         let participantArr = this.state.raidParticipants;
         participantArr.push(this.state.currentlySelectedCharacter);
-        
+
         this.setState({ raidParticipants: participantArr });
     }
 
     render() {
+        console.log(this);
         let title = (this.props.bossName) ? <h1>{this.props.bossName}</h1> : <h1>Custom Boss</h1>
         let bossSelector = (!this.props.bossName) ?
             <>
@@ -92,7 +82,7 @@ class CreateRaidPage extends Component {
                         <option key={key} value={op}>{op}</option>
                     ))}
                 </select>
-            </> : "";
+            </> : <span></span>;
         // let lootSelector = 
         //     <>
         //         <label htmlFor="loot"></label>
@@ -122,7 +112,11 @@ class CreateRaidPage extends Component {
             <>
                 {this.props.NavBar}
                 {title}
+
                 <div className={styles.CreateRaidPage}>
+
+
+
                     <div className={styles.left}>
                         <form onSubmit={this.handleSubmit}>
                             <div>
@@ -132,6 +126,8 @@ class CreateRaidPage extends Component {
                         </form>
                     </div>
 
+
+
                     <div className={styles.right}>
                         <span>Date:</span>
                         <div className={styles.calendar}>
@@ -140,6 +136,8 @@ class CreateRaidPage extends Component {
                         <span>Participants:</span>
                         {participantSelector}
                     </div>
+
+
                 </div>
             </>
         )
