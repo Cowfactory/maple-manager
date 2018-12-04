@@ -12,7 +12,7 @@ class CreateRaidPage extends Component {
             raidParticipants: [],
             // allRaidGroups: [],
             // allCharacters: [],
-            boss: this.props.bossName || null,
+            boss: this.props.bossName || 'Zakum',
             activeGroup: null,
             date: null
         }
@@ -45,6 +45,7 @@ class CreateRaidPage extends Component {
                 {this.props.NavBar}
                 {title}
                 <div className={styles.CreateRaidPage}>
+                    {bossSelector}
                     <RaidParticipationPanel 
                         liftParticipantsToState={this.handleAddParticpant}
                     />
