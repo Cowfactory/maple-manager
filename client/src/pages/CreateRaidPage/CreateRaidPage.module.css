@@ -4,7 +4,6 @@
     align-content: center;
     justify-content: center;
 }
-
 .left, .right {
     width: 40%;
     display: flex;
@@ -13,11 +12,6 @@
     justify-content: center;
 }
 
-.calendar {
-    margin: 0 auto;
-}
-
-.participantList {
-    display: flex;
-    flex-direction: column;
+.rightPanel {
+    /* width: 30%; */
 }

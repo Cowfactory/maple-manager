@@ -7,9 +7,11 @@ class RaidParticipationPanel extends Component {
         super(props)
         this.state = {
             raidParticipants: [],
+            raidOrganizer: null,
             allCharacters: [],
             currentChar: '',
-            _selectValue: ''
+            _selectValue: '',
+            _select2Value: ''
         }
     }
 
@@ -27,6 +29,7 @@ class RaidParticipationPanel extends Component {
                 this.setState({
                     allCharacters: allCharacters,
                     currentChar: allCharacters[0],
+                    raidOrganizer: allCharacters[0]
                 })
             })
             .catch(err => {
@@ -36,9 +39,16 @@ class RaidParticipationPanel extends Component {
     }
 
     handleSelectChange = (e) => {
-        this.setState({ 
+        this.setState({
             currentChar: JSON.parse(e.target.value),
-            _selectValue: e.target.value 
+            _selectValue: e.target.value
+        })
+    }
+
+    handleOrganizerChange = (e) => {
+        this.setState({
+            raidOrganizer: JSON.parse(e.target.value),
+            _select2Value: e.target.value
         })
     }
 
@@ -49,46 +59,73 @@ class RaidParticipationPanel extends Component {
         })
 
         // Add participant to list if not duplicate
-        if(!duplicateCharEntry) 
+        if (!duplicateCharEntry)
             participantArr.push(this.state.currentChar)
         else {
             // TODO: toast notification - duplicate character
         }
 
         this.setState({ raidParticipants: participantArr });
-        this.props.liftParticipantsToState(participantArr);
+        // this.props.liftParticipantsToState(participantArr);
     }
 
+    handleAddOrganizer = (e) => {
+        if(this.state._select2Value) {
+            // console.log(this.state.raidOrganizer);
+            let organizer = JSON.parse(this.state._select2Value);
+            this.setState({ raidOrganizer: organizer });
+            this.props.liftOrganizerToState(organizer);
+
+        } else {
+            //ToDo: Toast err
+        }
+    }
     
 
     render() {
-        let participantSelector = 
+        let participantSelector =
             <div className={styles.participantSelector}>
-                <label htmlFor="participants">Add by IGN:</label>
-                <select name="participants"
-                    onChange={this.handleSelectChange}
-                    value={this.state._selectValue}>
+                <div>
+                    <label htmlFor="participants">Add by IGN:</label>
+                    <select name="participants"
+                        onChange={this.handleSelectChange}
+                        value={this.state._selectValue}>
 
-                    {this.state.allCharacters.map((participant, idx) => (
-                        <option key={idx} value={JSON.stringify(participant)}>
-                            {participant.ign} - {participant.class} | {participant.level}
-                        </option>
-                    ))}
-                </select>
-                <button type="button" value='Add Participant' onClick={this.handleAddParticipant}>Add Participant</button>
-            </div>
-           
+                        {this.state.allCharacters.map((character, idx) => (
+                            <option key={idx} value={JSON.stringify(character)}>
+                                {character.ign} - {character.class} | {character.level}
+                            </option>
+                        ))}
+                    </select>
+                    <button type="button" value='Add Participant' onClick={this.handleAddParticipant}>Add Participant</button>
+                </div>
+                <div>
+                    <label htmlFor="participants">Organizer:</label>
+                    <select name="organizer"
+                        onChange={this.handleOrganizerChange}
+                        value={this.state._select2Value}>
 
-        let participantList =
-            <div className={styles.participantList}>
-                {this.state.raidParticipants.map((participant, idx) => (
-                    <div key={idx}>{participant.ign} - {participant.class} | {participant.level}</div>
-                ))}
+                        {this.state.allCharacters.map((character, idx) => (
+                            <option key={idx} value={JSON.stringify(character)}>
+                                {character.ign} - {character.class} | {character.level}
+                            </option>
+                        ))}
+                    </select>
+                    <button type="button" value='Add Organizer' onClick={this.handleAddOrganizer}>Add Organizer</button>
+                </div>
             </div>
+
+
+        // let participantList =
+        //     <div className={styles.participantList}>
+        //         {this.state.raidParticipants.map((participant, idx) => (
+        //             <div key={idx}>{participant.ign} - {participant.class} | {participant.level}</div>
+        //         ))}
+        //     </div>
 
         return (
             <div className={styles.RaidParticipation}>
-                {participantList}
+                {/* {participantList} */}
                 {participantSelector}
             </div>
         )

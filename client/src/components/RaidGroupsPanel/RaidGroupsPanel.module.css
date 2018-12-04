@@ -5,8 +5,13 @@
 .groupSelector {
     display: flex;
     flex-direction: column;
+    align-content: flex-start;
 }
 
+.submitBtn {
+    width: 25%;
+    display: inline-block;
+}
 .groupDisplay {
     
 }

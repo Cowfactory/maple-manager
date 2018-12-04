@@ -13,7 +13,11 @@ const raidSchema = new mongoose.Schema({
     ],
     participants: [
         {type: mongoose.Schema.Types.ObjectId, ref: 'Character'}
-    ]
+    ],
+    date: {
+        type: String,
+        required: [true, 'A date is required']
+    }
 }, {
     timestamps: true
 })

@@ -20,8 +20,6 @@ class RaidGroupsPanel extends Component {
                     allRaidGroups: raidGroups,
                     selectedGroup: raidGroups[0]
                 })
-                // Lift the first group to state as default
-                this.props.liftActiveGroupToState(this.state.selectedGroup)
             })
             .catch(err => {
                 console.log("Error in API request at /api/raidGroups")
@@ -74,18 +72,21 @@ class RaidGroupsPanel extends Component {
                     </select>
                     <button type="button" value='New Team' onClick={this.createNewGroup}>New Team</button>
                 </div>
-                <button type="button" value='Select Team' onClick={this.handleGroupSelect}>Select Team</button>
+                <button className={styles.submitBtn} type="button" value='Select Team' 
+                    onClick={this.handleGroupSelect}>
+                    Select Team
+                </button>
             </div>
 
-        let groupDisplay =
-            <div className={styles.groupDisplay}>
-                {(this.state._selectVal) ? this.state.selectedGroup.name : ""}
-            </div>
+        // let groupDisplay =
+        //     <div className={styles.groupDisplay}>
+        //         {(this.state._selectVal) ? this.state.selectedGroup.name : ""}
+        //     </div>
 
         return (
             <div className={styles.RaidGroupsPanel}>
                 {groupSelector}
-                {groupDisplay}
+                {/* {groupDisplay} */}
             </div>
         )
     }

@@ -13,7 +13,6 @@ const itemSchema = new mongoose.Schema({
         required: true,
         type: String
     },
-    img_url: String,
 }, {
     timestamps: true
 })
