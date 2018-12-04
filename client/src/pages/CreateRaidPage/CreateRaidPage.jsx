@@ -37,7 +37,8 @@ class CreateRaidPage extends Component {
                 this.setState({
                     allRaidGroups: raidGroups,
                     allCharacters: allCharacters,
-                    currentlySelectedCharacter: allCharacters[0]
+                    currentlySelectedCharacter: allCharacters[0],
+                    boss: this.props.bossName
                 })
             }).catch(err => {
                 //Failure to get data
@@ -82,7 +83,7 @@ class CreateRaidPage extends Component {
                         <option key={key} value={op}>{op}</option>
                     ))}
                 </select>
-            </> : <span></span>;
+            </> : <h3>{this.state.boss}</h3>;
         // let lootSelector = 
         //     <>
         //         <label htmlFor="loot"></label>
