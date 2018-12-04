@@ -4,6 +4,7 @@ import options from './options';
 import Calendar from '../../components/Calendar/Calendar';
 import styles from './CreateRaidPage.module.css';
 import RaidParticipationPanel from '../../components/RaidParticipationPanel/RaidParticipationPanel';
+import RaidGroupsPanel from '../../components/RaidGroupsPanel/RaidGroupsPanel';
 
 class CreateRaidPage extends Component {
     constructor(props) {
@@ -14,38 +15,8 @@ class CreateRaidPage extends Component {
             allRaidGroups: [],
             allCharacters: [],
             boss: '',
-            date: null
+            date: this.props.bossName || null,
         }
-    }
-
-    /*--- Lifecycle Methods ---*/
-    componentDidMount() {
-        // Get list of raid groups
-        Promise.all([axios.get('/api/raidgroups'), axios.get('/api/users')])
-            .then(responses => {
-                let raidGroups = responses[0].data.groups;
-                let users = responses[1].data.users;
-
-                let allCharacters = [];
-                // get every character from every user into arr
-                users.forEach(user => {
-                    user.characters.forEach(character => {
-                        allCharacters.push(character);
-                    })
-                })
-
-                let defaultBoss = 'Zakum';
-
-                this.setState({
-                    allRaidGroups: raidGroups,
-                    allCharacters: allCharacters,
-                    // currentlySelectedCharacter: allCharacters[0],
-                    boss: this.props.bossName || defaultBoss
-                })
-            }).catch(err => {
-                //Failure to get data
-                console.log(err);
-            })
     }
 
     /*--- Callback Functions ---*/
@@ -75,21 +46,6 @@ class CreateRaidPage extends Component {
                     ))}
                 </select>
             </> : <h3>{this.state.boss}</h3>;
-        // let lootSelector = 
-        //     <>
-        //         <label htmlFor="loot"></label>
-        //         <select>
-
-        //         </select>
-        //     </>;
-        
-        // done this way b/c for some reason the renders aren't happening on state change...
-        let raidParticipationPanel = (this.state.allCharacters.length) ?
-            <RaidParticipationPanel 
-                allCharacters={this.state.allCharacters}
-            />
-            :
-            <div></div>
 
         return (
             <>
@@ -98,8 +54,9 @@ class CreateRaidPage extends Component {
 
                 <div className={styles.CreateRaidPage}>
 
-                    {raidParticipationPanel}
-                    
+                    {/* {raidParticipationPanel} */}
+                    <RaidParticipationPanel />
+                    <RaidGroupsPanel />
 
 
                     {/* <div className={styles.left}>
