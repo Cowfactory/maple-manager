@@ -7,4 +7,12 @@
 
 .left, .right {
     width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.calendar {
+    margin: 0 auto;
 }

@@ -9,7 +9,10 @@ class CreateRaidPage extends Component {
         super(props);
         this.state = {
             raidGroups: [],
-            allParticipants: [],
+            raidParticipants: [],
+            // allUsers: [],
+            allCharacters: [],
+            currentlySelectedCharacter: "",
             boss: null,
             date: null
         }
@@ -32,13 +35,22 @@ class CreateRaidPage extends Component {
         // Get list of users
         axios.get('/api/users')
             .then(response => {
-                console.log(response.data.users);
                 if (!response) {
                     console.log("failed to get users")
                     // failure
                 } else {
+                    let allCharacters = [];
+                    // get every character from every user into arr
+                    response.data.users.forEach(user => {
+                        user.characters.forEach(char => {
+                            allCharacters.push(char);
+                        })
+                    })
+                    // let allUsers = response.data.users;
+                    let currentlySelectedCharacter = allCharacters[0];
                     this.setState({
-                        allParticipants: response.data.users
+                        allCharacters: allCharacters,
+                        currentlySelectedCharacter: currentlySelectedCharacter
                     })
                 }
             })
@@ -59,9 +71,15 @@ class CreateRaidPage extends Component {
             raidType: e.target.value
         })
     }
+    handleCurrentlySelectedCharacterChange = (e) => {
+        this.setState({ currentlySelectedCharacter: JSON.parse(e.target.value) })
+    }
 
     handleAddParticipant = (e) => {
-
+        let participantArr = this.state.raidParticipants;
+        participantArr.push(this.state.currentlySelectedCharacter);
+        
+        this.setState({ raidParticipants: participantArr });
     }
 
     render() {
@@ -75,22 +93,29 @@ class CreateRaidPage extends Component {
                     ))}
                 </select>
             </> : "";
-        let lootSelector = 
-            <>
-                <label htmlFor="loot"></label>
-                <select>
+        // let lootSelector = 
+        //     <>
+        //         <label htmlFor="loot"></label>
+        //         <select>
+
+        //         </select>
+        //     </>;
+        let participantSelector = 
+            <div className={styles.participantSelector}>
+                <label htmlFor="participants"></label>
+                <select name="participants" 
+                    onChange={this.handleCurrentlySelectedCharacterChange} 
+                    value={this.state.currentlySelectedCharacter}>
+
+                    {this.state.allCharacters.map((participant, idx) => (
+                        <option key={idx} value={JSON.stringify(participant)}>
+                            {participant.ign} - {participant.class} | {participant.level}
+                        </option>
+                    ))}
 
                 </select>
-            </>;
-        let participantSelector = 
-            <>
-                <label htmlFor="participants"></label>
-                <select name="participants">
-                    {this.state.allParticipants.map((participant, idx) => (
-                        <option key={idx} value={participant}>{participant.name}</option>
-                    ))}
-                </select>
-            </>
+                <button type="button" value='Add Participant' onClick={this.handleAddParticipant}>Add Participant</button>
+            </div>
 
 
         return (
@@ -106,10 +131,14 @@ class CreateRaidPage extends Component {
                             <input type="submit" value='Submit' />
                         </form>
                     </div>
+
                     <div className={styles.right}>
-                        <Calendar handleChange={this.handleDateChange} />
+                        <span>Date:</span>
+                        <div className={styles.calendar}>
+                            <Calendar handleChange={this.handleDateChange} /><br /><br />
+                        </div>
+                        <span>Participants:</span>
                         {participantSelector}
-                        <button type="button" value='Add Participant' onClick={this.handleAddParticipant} />
                     </div>
                 </div>
             </>

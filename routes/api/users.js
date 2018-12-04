@@ -8,7 +8,8 @@ router.get('/', (req, res) => {
         .then(users => res.json({ 
             users: users.map(user => ({
                 id: user._id,
-                name: user.name
+                name: user.name,
+                characters: user.characters
             }))
         }))
         .catch(err => {
