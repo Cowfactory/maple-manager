@@ -6,6 +6,8 @@ const RaidGroup = require("../../db/models/RaidGroup");
 router.get('/', (req, res) => {
     RaidGroup.find({})
         .then(raidGroups => res.json({
+            type: 'success',
+            status: 200,
             groups: raidGroups 
         }))
         .catch(err => {

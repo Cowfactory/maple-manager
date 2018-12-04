@@ -2,6 +2,20 @@ const express = require('express');
 const router = express.Router();
 const User = require("../../db/models/User");
  
+// Get all username:id pairs
+router.get('/', (req, res) => {
+    User.find({})
+        .then(users => res.json({ 
+            users: users.map(user => ({
+                id: user._id,
+                name: user.name
+            }))
+        }))
+        .catch(err => {
+            res.status(500);
+        })
+})
+
 // Get all user's characters
 router.get('/:id/characters', (req, res) => {
     User.findById(req.params.id)

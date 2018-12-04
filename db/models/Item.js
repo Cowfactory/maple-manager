@@ -1,11 +1,18 @@
 const mongoose = require('mongoose');
 
 const itemSchema = new mongoose.Schema({
-    name: {
-        required: [true, 'A name is required'],
+    category: {
+        required: true,
         type: String
     },
-    type: String,
+    subtype: {
+        required: true,
+        type: String
+    },
+    name: {
+        required: true,
+        type: String
+    },
     img_url: String,
 }, {
     timestamps: true

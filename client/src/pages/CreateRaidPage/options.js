@@ -47,7 +47,8 @@ function bossOptions() {
         "Targa",
         "Scarlion",
         "Krexel",
-        "Other",
+        "Pianus",
+        "Other"
     ];
 }
 

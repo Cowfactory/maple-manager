@@ -70,12 +70,12 @@ class App extends Component {
                             />
                         )} />
                         <Route path='/createRaid' render={(props) => {
-                            console.log(props.location.state.bossName);
+                            let bossName = props.location.state ? props.location.state.bossName : null
                             return this.state.user ?
                                 <CreateRaidPage 
                                     NavBar={nav}
                                     user={this.state.user}
-                                    bossName={props.location.state.bossName}
+                                    bossName={bossName}
                                 /> :
                                 <Redirect to='/login' />
                         }} />

@@ -5,6 +5,9 @@ const raidSchema = new mongoose.Schema({
         required: [true, 'A raid organizer is required'],
         type: mongoose.Schema.Types.ObjectId, ref: 'Character'
     },
+    commonlyFoundLoots: [
+        {type: mongoose.Schema.Types.ObjectId, ref: 'Loot'}
+    ],
     loots: [
         {type: mongoose.Schema.Types.ObjectId, ref: 'Loot'}
     ],
