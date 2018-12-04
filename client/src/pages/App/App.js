@@ -69,14 +69,16 @@ class App extends Component {
                                 user={this.state.user}
                             />
                         )} />
-                        <Route path='/createRaid' render={() => (
-                            this.state.user ?
+                        <Route path='/createRaid' render={(props) => {
+                            console.log(props.location.state.bossName);
+                            return this.state.user ?
                                 <CreateRaidPage 
                                     NavBar={nav}
                                     user={this.state.user}
+                                    bossName={props.location.state.bossName}
                                 /> :
                                 <Redirect to='/login' />
-                        )} />
+                        }} />
                         <Route exact path='/404' render={() => 
                             <NoMatchPage 
                                 NavBar={nav}
