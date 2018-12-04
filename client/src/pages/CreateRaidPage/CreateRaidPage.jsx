@@ -3,6 +3,7 @@ import axios from 'axios';
 import options from './options';
 import Calendar from '../../components/Calendar/Calendar';
 import styles from './CreateRaidPage.module.css';
+import RaidParticipationPanel from '../../components/RaidParticipationPanel/RaidParticipationPanel';
 
 class CreateRaidPage extends Component {
     constructor(props) {
@@ -12,8 +13,7 @@ class CreateRaidPage extends Component {
             // allUsers: [],
             allRaidGroups: [],
             allCharacters: [],
-            currentlySelectedCharacter: "",
-            boss: null,
+            boss: '',
             date: null
         }
     }
@@ -34,11 +34,13 @@ class CreateRaidPage extends Component {
                     })
                 })
 
+                let defaultBoss = 'Zakum';
+
                 this.setState({
                     allRaidGroups: raidGroups,
                     allCharacters: allCharacters,
-                    currentlySelectedCharacter: allCharacters[0],
-                    boss: this.props.bossName
+                    // currentlySelectedCharacter: allCharacters[0],
+                    boss: this.props.bossName || defaultBoss
                 })
             }).catch(err => {
                 //Failure to get data
@@ -56,29 +58,18 @@ class CreateRaidPage extends Component {
             date: e.target.value
         })
     }
-    handleRaidTypeChange = (e) => {
+    handleBossChange = (e) => {
         this.setState({
-            raidType: e.target.value
+            boss: e.target.value
         })
     }
-    handleCurrentlySelectedCharacterChange = (e) => {
-        this.setState({ currentlySelectedCharacter: JSON.parse(e.target.value) })
-    }
-
-    handleAddParticipant = (e) => {
-        let participantArr = this.state.raidParticipants;
-        participantArr.push(this.state.currentlySelectedCharacter);
-
-        this.setState({ raidParticipants: participantArr });
-    }
-
+  
     render() {
-        console.log(this);
         let title = (this.props.bossName) ? <h1>{this.props.bossName}</h1> : <h1>Custom Boss</h1>
         let bossSelector = (!this.props.bossName) ?
             <>
                 <label htmlFor='raid-type'>Boss: </label>
-                <select name="raid-type" value={this.state.raidType} onChange={this.handleRaidTypeChange}>
+                <select name="raid-type" value={this.state.boss} onChange={this.handleBossChange}>
                     {options.bossOptions().map((op, key) => (
                         <option key={key} value={op}>{op}</option>
                     ))}
@@ -91,23 +82,14 @@ class CreateRaidPage extends Component {
 
         //         </select>
         //     </>;
-        let participantSelector = 
-            <div className={styles.participantSelector}>
-                <label htmlFor="participants"></label>
-                <select name="participants" 
-                    onChange={this.handleCurrentlySelectedCharacterChange} 
-                    value={this.state.currentlySelectedCharacter}>
-
-                    {this.state.allCharacters.map((participant, idx) => (
-                        <option key={idx} value={JSON.stringify(participant)}>
-                            {participant.ign} - {participant.class} | {participant.level}
-                        </option>
-                    ))}
-
-                </select>
-                <button type="button" value='Add Participant' onClick={this.handleAddParticipant}>Add Participant</button>
-            </div>
-
+        
+        // done this way b/c for some reason the renders aren't happening on state change...
+        let raidParticipationPanel = (this.state.allCharacters.length) ?
+            <RaidParticipationPanel 
+                allCharacters={this.state.allCharacters}
+            />
+            :
+            <div></div>
 
         return (
             <>
@@ -116,15 +98,18 @@ class CreateRaidPage extends Component {
 
                 <div className={styles.CreateRaidPage}>
 
+                    {raidParticipationPanel}
+                    
 
 
-                    <div className={styles.left}>
-                        <form onSubmit={this.handleSubmit}>
-                            <div>
-                                {bossSelector}
-                            </div>
-                            <input type="submit" value='Submit' />
-                        </form>
+                    {/* <div className={styles.left}>
+                        <div>
+                            {bossSelector}
+                            
+                            <form onSubmit={this.handleSubmit}>
+                                <input type="submit" value='Submit' />
+                            </form>
+                        </div>
                     </div>
 
 
@@ -135,8 +120,8 @@ class CreateRaidPage extends Component {
                             <Calendar handleChange={this.handleDateChange} /><br /><br />
                         </div>
                         <span>Participants:</span>
-                        {participantSelector}
-                    </div>
+                        
+                    </div> */}
 
 
                 </div>

@@ -1,0 +1,13 @@
+.RaidParticipation {
+    display: flex;
+    flex-direction: row
+}
+
+.participantSelector{
+    display: flex;
+    flex-direction: column
+}
+
+.participantList {
+    
+}

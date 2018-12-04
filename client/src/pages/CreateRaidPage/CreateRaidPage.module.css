@@ -16,3 +16,8 @@
 .calendar {
     margin: 0 auto;
 }
+
+.participantList {
+    display: flex;
+    flex-direction: column;
+}
