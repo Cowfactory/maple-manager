@@ -20,9 +20,11 @@ class RaidGroupsPanel extends Component {
                     allRaidGroups: raidGroups,
                     selectedGroup: raidGroups[0]
                 })
+                // Lift the first group to state as default
+                this.props.liftActiveGroupToState(this.state.selectedGroup)
             })
             .catch(err => {
-                console.log(err)
+                console.log("Error in API request at /api/raidGroups")
                 //ToDo: Toast an error
             })
     }
@@ -34,17 +36,20 @@ class RaidGroupsPanel extends Component {
     }
 
     handleGroupSelect = (e) => {
-        if(!this.state._selectVal) {
+        // On the initial click - _selectVal won't be set yet (null)
+        if (!this.state._selectVal) {
             let val = this.state.allRaidGroups[0];
             let str = JSON.stringify(this.state.allRaidGroups[0]);
             this.setState({
                 _selectVal: str,
-                selectedGroup: val 
+                selectedGroup: val
             })
+            this.props.liftActiveGroupToState(JSON.parse(this.state._selectVal))
         } else {
             this.setState({
                 selectedGroup: JSON.parse(this.state._selectVal)
             })
+            this.props.liftActiveGroupToState(JSON.parse(this.state._selectVal))
         }
     }
 
@@ -56,21 +61,23 @@ class RaidGroupsPanel extends Component {
         let groupSelector =
             <div className={styles.groupSelector}>
                 <label htmlFor="groups">Group: </label>
-                <select name="groups"
-                    onChange={this.handleSelectChange}
-                    value={this.state._selectVal}>
+                <div>
+                    <select name="groups"
+                        onChange={this.handleSelectChange}
+                        value={this.state._selectVal}>
 
-                    {this.state.allRaidGroups.map((group, idx) => (
-                        <option key={idx} value={JSON.stringify(group)}>
-                            {group.name}
-                        </option>
-                    ))}
-                </select>
+                        {this.state.allRaidGroups.map((group, idx) => (
+                            <option key={idx} value={JSON.stringify(group)}>
+                                {group.name}
+                            </option>
+                        ))}
+                    </select>
+                    <button type="button" value='New Team' onClick={this.createNewGroup}>New Team</button>
+                </div>
                 <button type="button" value='Select Team' onClick={this.handleGroupSelect}>Select Team</button>
-                <button type="button" value='New Team' onClick={this.createNewGroup}>New Team</button>
             </div>
 
-        let groupDisplay = 
+        let groupDisplay =
             <div className={styles.groupDisplay}>
                 {(this.state._selectVal) ? this.state.selectedGroup.name : ""}
             </div>

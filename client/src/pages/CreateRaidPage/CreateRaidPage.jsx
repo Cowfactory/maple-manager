@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import options from './options';
 import Calendar from '../../components/Calendar/Calendar';
 import styles from './CreateRaidPage.module.css';
@@ -11,11 +10,11 @@ class CreateRaidPage extends Component {
         super(props);
         this.state = {
             raidParticipants: [],
-            // allUsers: [],
-            allRaidGroups: [],
-            allCharacters: [],
-            boss: '',
-            date: this.props.bossName || null,
+            // allRaidGroups: [],
+            // allCharacters: [],
+            boss: this.props.bossName || null,
+            activeGroup: null,
+            date: null
         }
     }
 
@@ -24,16 +23,10 @@ class CreateRaidPage extends Component {
 
     }
     
-    handleDateChange = (e) => {
-        this.setState({
-            date: e.target.value
-        })
-    }
-    handleBossChange = (e) => {
-        this.setState({
-            boss: e.target.value
-        })
-    }
+    handleDateChange = (date) => { this.setState({ date: date }) }
+    handleActiveGroupChange = (group) => { this.setState({ activeGroup: group }) }
+    handleBossChange = (e) => { this.setState({ boss: e.target.value }) }
+    handleAddParticpant = (arr) => { this.setState({raidParticipants: arr}) }
   
     render() {
         let title = (this.props.bossName) ? <h1>{this.props.bossName}</h1> : <h1>Custom Boss</h1>
@@ -51,36 +44,16 @@ class CreateRaidPage extends Component {
             <>
                 {this.props.NavBar}
                 {title}
-
                 <div className={styles.CreateRaidPage}>
-
-                    {/* {raidParticipationPanel} */}
-                    <RaidParticipationPanel />
-                    <RaidGroupsPanel />
-
-
-                    {/* <div className={styles.left}>
-                        <div>
-                            {bossSelector}
-                            
-                            <form onSubmit={this.handleSubmit}>
-                                <input type="submit" value='Submit' />
-                            </form>
-                        </div>
-                    </div>
-
-
-
-                    <div className={styles.right}>
-                        <span>Date:</span>
-                        <div className={styles.calendar}>
-                            <Calendar handleChange={this.handleDateChange} /><br /><br />
-                        </div>
-                        <span>Participants:</span>
-                        
-                    </div> */}
-
-
+                    <RaidParticipationPanel 
+                        liftParticipantsToState={this.handleAddParticpant}
+                    />
+                    <RaidGroupsPanel 
+                        liftActiveGroupToState={this.handleActiveGroupChange}
+                    />
+                    <Calendar 
+                        liftDateToState={this.handleDateChange}
+                    />
                 </div>
             </>
         )

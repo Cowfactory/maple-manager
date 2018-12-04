@@ -56,6 +56,7 @@ class RaidParticipationPanel extends Component {
         }
 
         this.setState({ raidParticipants: participantArr });
+        this.props.liftParticipantsToState(participantArr);
     }
 
     
