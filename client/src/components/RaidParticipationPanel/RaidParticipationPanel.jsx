@@ -54,30 +54,37 @@ class RaidParticipationPanel extends Component {
 
     handleAddParticipant = (e) => {
         let participantArr = this.state.raidParticipants;
+        let currentChar = this.state.currentChar;
+
         let duplicateCharEntry = participantArr.find((participant) => {
-            return participant.ign === this.state.currentChar.ign
+            return participant.ign === currentChar.ign
         })
 
         // Add participant to list if not duplicate
         if (!duplicateCharEntry)
-            participantArr.push(this.state.currentChar)
+            participantArr.push(currentChar)
         else {
             // TODO: toast notification - duplicate character
         }
 
         this.setState({ raidParticipants: participantArr });
-        // this.props.liftParticipantsToState(participantArr);
+        this.props.liftParticipantsToState(participantArr);
     }
 
     handleAddOrganizer = (e) => {
+        let participants = this.state.allCharacters;
+
         if(this.state._select2Value) {
-            // console.log(this.state.raidOrganizer);
+            // if there is a user selection
             let organizer = JSON.parse(this.state._select2Value);
             this.setState({ raidOrganizer: organizer });
             this.props.liftOrganizerToState(organizer);
-
         } else {
-            //ToDo: Toast err
+            console.log("??")
+            // if user has made no selection
+            let organizer = participants[0];
+            this.setState({ raidOrganizer: organizer })
+            this.props.liftOrganizerToState(organizer);
         }
     }
     
