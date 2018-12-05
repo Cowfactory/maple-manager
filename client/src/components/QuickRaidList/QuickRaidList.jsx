@@ -1,30 +1,45 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './QuickRaidList.module.css';
-import zakumImg from '../../img/jobicons/all.png';
-import horntailImg from '../../img/jobicons/all.png';
-import customImg from '../../img/jobicons/all.png';
+import zakumImg from '../../img/bosses/zakum.png';
+import horntailImg from '../../img/bosses/ht.webp';
+import customImg from '../../img/bosses/mano.png';
 
 const QuickRaidList = (props) => (
     <div className={styles.QuickRaidList}>
         <div className={styles.listSegment}>
-            <img src={horntailImg} alt="Horntail"></img>
-            <p>Horntail</p>
-            <Link to={{ pathname: '/createRaid', state: {bossName: 'Horntail'} }} >
+            <div className={styles.subSegment}>
+                <img className={styles.bossImg} src={horntailImg} alt="Horntail"></img>
+            </div>
+            <div className={styles.textSegment}>
+                <b>Horntail</b>
+                <p>Lvl. 155</p>
+            </div>
+            <Link className={styles.subSegment} to={{ pathname: '/createRaid', state: {bossName: 'Horntail'} }} >
                 New Horntail Run
             </Link>
         </div>
         <div className={styles.listSegment}>
-            <img src={zakumImg} alt="Zakum"></img>
-            <p>Zakum</p>
-            <Link to={{ pathname: '/createRaid', state: {bossName: 'Zakum'} }} > 
+            <div className={styles.subSegment}>
+                <img className={styles.bossImg} src={zakumImg} alt="Zakum"></img>
+            </div>
+            <div className={styles.textSegment}>
+                <b>Zakum</b>
+                <p>Lvl. 135</p>
+            </div>
+            <Link className={styles.subSegment} to={{ pathname: '/createRaid', state: {bossName: 'Zakum'} }} > 
                 New Zakum Run
             </Link>
         </div>
         <div className={styles.listSegment}>
-            <img src={customImg} alt="custom boss"></img>
-            <p>Custom Run</p>
-            <Link to="/createRaid">New Run</Link>
+            <div className={styles.subSegment}>
+                <img className={styles.bossImg} src={customImg} alt="custom boss"></img>
+            </div>
+            <div className={styles.textSegment}>
+                <b>Custom</b>
+                <p>Lvl. ? </p>
+            </div>
+            <Link className={styles.subSegment} to="/createRaid">New Run</Link>
         </div>
     </div>
 )

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import styles from './BossrunList.module.css';
 
-
 class BossrunList extends Component {
     constructor(props) {
         super(props)
@@ -31,7 +30,7 @@ class BossrunList extends Component {
             <>
                 {this.state.bossruns.map((run, idx) => (
                     <div key={idx}>
-                        {run.boss} | {run.date} | organizer
+                        {run.boss} | {run.date} 
                     </div>
                 ))
                 }

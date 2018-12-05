@@ -1,16 +1,48 @@
 .QuickRaidList {
+    display: flex;
+    flex-direction: column;   
+    align-content: center;
+    justify-content: space-between;
+    width: 100%;
+}
 
+.textSegment {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .listSegment {
+    width: 100%;
     display: flex;
-    flex-direction: row;   
+    flex-direction: row;
     align-content: center;
+    align-items: center;
     justify-content: space-between;
     border: 1px dotted black;
+    margin-top: 3%;
+
+    -moz-box-shadow:    4px 5px 8px 4px #ccc;
+    -webkit-box-shadow: 4px 5px 8px 4px #ccc;
+    box-shadow:         4px 5px 8px 4px #ccc;
+
+
 }
 
-.listSegment img {
-    width: 10%;
-    height: 10%;
+.listSegment a {
+    text-decoration: none;
+
+}
+
+.subSegment {
+    width: 33%;
+}
+
+.bossImg {
+    display: inline-block;
+    width: 8vw;
+    min-height: 8vh;
+    object-fit: cover;
 }

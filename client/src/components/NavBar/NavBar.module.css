@@ -1,29 +1,36 @@
 .NavBar {
     width: 100vw;
-    min-height: 5vh;
+    min-height: 6vh;
     display: flex;
     align-items: center;
     background-color: #1a6ecc;
     font-size: 18px;
     color: #ffffff;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .navItem {
-    height: 100%;
     width: 100%;
     color: #ffffff;
     text-decoration: none;
-
+    margin: 0.2em;
+    padding: 2px;
 }
 
 .navItem:hover {
+    color: gold;
     background-color: #1967be;
 }
 
 .left {
-
+    padding-left: 10px;
 }
 
 .right {
     margin-left: auto;
+    padding-right: 10px;
 }

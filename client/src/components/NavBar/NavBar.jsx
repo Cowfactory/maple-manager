@@ -12,7 +12,7 @@ const NavBar = (props) => {
                         <Link className={styles.navItem} to='/'>Home</Link>&nbsp;
                         <Link className={styles.navItem} to='/groups'>Groups</Link>&nbsp;
                         | &nbsp; 
-                        <span className={styles.navItem}>{props.user.name}</span>&nbsp;
+                        <span>{props.user.name}</span>&nbsp;
                     </div>
                     <div className={styles.right}>
                         <Link className={styles.navItem} to='/account'>My Account</Link>&nbsp;
