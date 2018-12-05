@@ -1,6 +1,8 @@
 # Maple Manager 
 ### An online raid tracker for Maplestory
 
+![example](https://i.imgur.com/K5wZaq9.png)
+
 ## View the app here:
 https://dashboard.heroku.com/apps/maple-manager
 
@@ -10,6 +12,11 @@ MERN Stack
   * Express
   * React
   * Node.js
+* JWT token auth
+* BCrypt
+* JSX
+* Mongoose
+
 
 ## Work To Do:
 * Implement Raid update, to add items and edit details after the fact
