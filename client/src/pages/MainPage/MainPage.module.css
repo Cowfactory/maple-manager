@@ -4,7 +4,13 @@
     align-content: center;
     justify-content: center;
 }
-
+hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    margin: 5px;
+    background-image: linear-gradient(to right, #FF822E, #ccc, #FF822E);
+}
 .left, .right {
     width: 35vw;
     background-color: #57A0D3;

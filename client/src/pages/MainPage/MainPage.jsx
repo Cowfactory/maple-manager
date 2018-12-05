@@ -10,6 +10,7 @@ const MainPage = (props) => {
             <div className={styles.MainPage}>
                 <div className={styles.left}>
                     <h1>Add a Boss Run</h1>
+                    <hr />
                     <QuickRaidList />
                 </div>
                 <div className={styles.right}>

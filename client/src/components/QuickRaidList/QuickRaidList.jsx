@@ -4,6 +4,7 @@ import styles from './QuickRaidList.module.css';
 import zakumImg from '../../img/bosses/zakum.png';
 import horntailImg from '../../img/bosses/ht.webp';
 import customImg from '../../img/bosses/mano.png';
+import signImg from '../../img/misc/sign.png';
 
 const QuickRaidList = (props) => (
     <div className={styles.QuickRaidList}>
@@ -15,9 +16,12 @@ const QuickRaidList = (props) => (
                 <b>Horntail</b>
                 <p>Lvl. 155</p>
             </div>
-            <Link className={styles.subSegment} to={{ pathname: '/createRaid', state: {bossName: 'Horntail'} }} >
-                New Horntail Run
-            </Link>
+            <div className={styles.subSegment}>
+                <Link className={styles.textSegment} to={{ pathname: '/createRaid', state: {bossName: 'Horntail'} }} >
+                    <b>New Run</b>
+                    <img src={signImg} className={styles.signImg}></img>
+                </Link>
+            </div>
         </div>
         <div className={styles.listSegment}>
             <div className={styles.subSegment}>
@@ -27,9 +31,12 @@ const QuickRaidList = (props) => (
                 <b>Zakum</b>
                 <p>Lvl. 135</p>
             </div>
-            <Link className={styles.subSegment} to={{ pathname: '/createRaid', state: {bossName: 'Zakum'} }} > 
-                New Zakum Run
-            </Link>
+            <div className={styles.subSegment}>
+                <Link className={styles.textSegment} to={{ pathname: '/createRaid', state: {bossName: 'Zakum'} }} > 
+                    <b>New Run</b>
+                    <img src={signImg} className={styles.signImg}></img>
+                </Link>
+            </div>
         </div>
         <div className={styles.listSegment}>
             <div className={styles.subSegment}>
@@ -39,7 +46,12 @@ const QuickRaidList = (props) => (
                 <b>Custom</b>
                 <p>Lvl. ? </p>
             </div>
-            <Link className={styles.subSegment} to="/createRaid">New Run</Link>
+            <div className={styles.subSegment}>
+                <Link className={styles.textSegment} to="/createRaid">
+                    <b>New Run</b>
+                    <img src={signImg} className={styles.signImg}></img>
+                </Link>
+            </div>
         </div>
     </div>
 )

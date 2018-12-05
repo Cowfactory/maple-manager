@@ -64,6 +64,7 @@ class RaidGroupsPage extends Component {
                 <div className={styles.RaidGroupsPage}>
                     <div className={styles.left}>
                         <h1>Groups Listing</h1>
+                        <hr />
                         {this.state.groups.length ?
                             <div>
                                 {this.state.groups.map((group, idx) => (
@@ -78,6 +79,7 @@ class RaidGroupsPage extends Component {
                     </div>
                     <div className={styles.right}>
                         <h1>Create a Group!</h1>
+                        <hr />
                         <form onSubmit={this.handleSubmit}>
                             <div>
                                 <label htmlFor="group-name">Group Name: </label>

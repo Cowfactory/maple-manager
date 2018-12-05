@@ -7,6 +7,7 @@
 }
 
 .textSegment {
+    color: Black;
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -23,10 +24,10 @@
     justify-content: space-between;
     border: 1px dotted black;
     margin-top: 3%;
-
-    -moz-box-shadow:    4px 5px 8px 4px #ccc;
-    -webkit-box-shadow: 4px 5px 8px 4px #ccc;
-    box-shadow:         4px 5px 8px 4px #ccc;
+    background-color: #457EB4;
+    -moz-box-shadow:    4px 5px 8px 1px #457EB4;
+    -webkit-box-shadow: 4px 5px 8px 1px #457EB4;
+    box-shadow:         4px 5px 8px 1px #457EB4;
 
 
 }
@@ -45,4 +46,9 @@
     width: 8vw;
     min-height: 8vh;
     object-fit: cover;
+}
+
+.signImg {
+    display: inline-block;
+    width: 4vw;
 }
