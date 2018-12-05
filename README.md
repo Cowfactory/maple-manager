@@ -4,7 +4,7 @@
 ![example](https://i.imgur.com/K5wZaq9.png)
 
 ## View the app here:
-https://dashboard.heroku.com/apps/maple-manager
+https://maple-manager.herokuapp.com/
 
 ## Technologies used
 MERN Stack
