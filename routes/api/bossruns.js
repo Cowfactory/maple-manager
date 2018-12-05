@@ -29,12 +29,14 @@ router.post('/', (req, res) => {
         })
 })
 
+// Get all bossruns that match ids in query string
 router.get('/', (req, res) => {
     let charIds = req.query.charIds;
 
     BossRun.find( { participants: { $in: charIds } } )
         .populate()   
         .exec((err, response) => {
+            console.log(response);
             if(err) res.json({ err: "A server error has occured" });
             res.json({ bossruns: response })
         })
