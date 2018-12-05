@@ -43,7 +43,7 @@ class CreateRaidPage extends Component {
         if(errArr.length === 0) {
             axios.post('/api/bossruns', data)
                 .then(response => { 
-                    // console.log(response) 
+                    console.log(response) 
                     this.setState({ redirectToAccount: true })
                 })
                 .catch(err => { console.log(err) })
