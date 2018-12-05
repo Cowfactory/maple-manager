@@ -20,6 +20,12 @@ router.get('/', (req, res) => {
         })
 });
 
+router.get('/:id', (req, res) => {
+    RaidGroup.find({ _id: req.params.id})
+        .then(raidGroups => res.json(raidGroups))
+        .catch(err => res.json({ err: "A server error has occured"}))
+});
+
 router.post('/', (req, res) => {
     // Look for an existing group w. the same name
     RaidGroup.find({ name: req.body.name })

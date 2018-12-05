@@ -31,20 +31,12 @@ router.post('/', (req, res) => {
 
 router.get('/', (req, res) => {
     let charIds = req.query.charIds;
-    // let charIds = Object.values(JSON.parse(req.params.charIds));
-    // console.log(charIds)
-    // console.dir(mongoose.Types.ObjectId(uid));
 
-    BossRun.find( { participants: { $in: charIds } } )    
-        .then(response => {
-            res.json({
-                bossruns: response
-            })
-        })
-        .catch(err => {
-            res.json({
-                err: "A server error has occured"
-            })
+    BossRun.find( { participants: { $in: charIds } } )
+        .populate()   
+        .exec((err, response) => {
+            if(err) res.json({ err: "A server error has occured" });
+            res.json({ bossruns: response })
         })
 })
 

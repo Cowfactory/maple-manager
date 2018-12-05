@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CharacterList from '../../components/CharacterList/CharacterList';
+import BossrunList from '../../components/BossrunList/BossrunList';
 import axios from 'axios';
 import styles from './AccountPage.module.css';
 
@@ -7,7 +8,9 @@ class AccountPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            characters: []
+            characters: [],
+            bossruns: [],
+            charIds: []
         }
     }
 
@@ -15,23 +18,15 @@ class AccountPage extends Component {
     // Load the character list via API call on-load
     componentDidMount() {
         let charIds = this.props.user.characters.map(c => c._id)
+        this.setState({ charIds: charIds })
 
-        Promise.all([
-            axios.get(`/api/users/${this.props.user._id}/characters`),
-            axios.request(`/api/bossruns`, {
-                method: 'get',
-                params: { charIds: charIds }
-            }) 
-        ])
-        .then(responses => {
-            let characters = responses[0].data;
-            let bossruns = responses[1].data;
-            console.log(characters)
-            console.log(bossruns);
+        axios.get(`/api/users/${this.props.user._id}/characters`)
+            .then(response => {
+                let characters = response.data;
+                this.setState({ characters })
+            })
+            .catch(err => { console.log(err) })
 
-            this.setState({ characters })
-        })
-        .catch(err => { console.log(err) })
     }
 
 
@@ -49,13 +44,16 @@ class AccountPage extends Component {
                 <div className={styles.AccountPage}>
                     <div className={styles.left}>
                         <h1>My Runs</h1>
+                        <BossrunList 
+                            charIds={this.state.charIds}
+                        />
                     </div>
                     <div className={styles.right}>
                         <h1>My Characters</h1>
                         <CharacterList
                             user={this.props.user}
                             deleteCharacter={this.deleteCharacter}
-                        />
+                        /> 
                     </div>
                 </div>
             </>
