@@ -13,6 +13,7 @@ class CharacterDetail extends Component {
     }
 
     deleteCharacter = (e) => {
+        console.log(this.props.character._id);
         this.props.deleteCharacter(this.props.character._id)
     }
 

@@ -27,6 +27,7 @@ router.post('/', (req, res) => {
             console.log(response)
             res.status(200);
         })
+        .catch(err => res.send(err))
 })
 
 // Get all bossruns that match ids in query string

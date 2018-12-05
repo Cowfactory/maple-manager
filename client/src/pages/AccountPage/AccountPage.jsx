@@ -36,8 +36,9 @@ class AccountPage extends Component {
 
     /*--- Callback functions ---*/
     deleteCharacter = (id) => {
+        console.log(id);
         // check where character state should be
-        axios.delete(`/api/users/${this.props.user._id}/character/${id}`)
+        axios.delete(`/api/users/${this.props.user._id}/characters/${id}`)
             .then(this.componentDidMount())
             .catch(err => console.log(err));
     }

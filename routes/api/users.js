@@ -30,7 +30,7 @@ router.get('/:id/characters', (req, res) => {
         })
 });
 
-router.delete('/:id/character/:cid', (req, res) => {
+router.delete('/:id/characters/:cid', (req, res) => {
     User.findByIdAndUpdate(req.params.id, {
         $pull: {
             _id: req.params.cid
