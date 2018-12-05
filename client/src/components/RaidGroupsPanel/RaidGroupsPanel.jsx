@@ -74,11 +74,11 @@ class RaidGroupsPanel extends Component {
                         ))}
                     </select>
                     {/* <button type="button" value='New Team' onClick={this.createNewGroup}>Select Group</button> */}
+                    <button className={styles.submitBtn} type="button" value='Select Team'
+                        onClick={this.handleGroupSelect}>
+                        Select Team
+                    </button>
                 </div>
-                <button className={styles.submitBtn} type="button" value='Select Team' 
-                    onClick={this.handleGroupSelect}>
-                    Select Team
-                </button>
             </div>
 
         // let groupDisplay =
