@@ -80,7 +80,6 @@ class RaidParticipationPanel extends Component {
             this.setState({ raidOrganizer: organizer });
             this.props.liftOrganizerToState(organizer);
         } else {
-            console.log("??")
             // if user has made no selection
             let organizer = participants[0];
             this.setState({ raidOrganizer: organizer })

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const BossRun = require("../../db/models/BossRun");
 
 router.post('/', (req, res) => {
@@ -29,7 +30,22 @@ router.post('/', (req, res) => {
 })
 
 router.get('/', (req, res) => {
-    
+    let charIds = req.query.charIds;
+    // let charIds = Object.values(JSON.parse(req.params.charIds));
+    // console.log(charIds)
+    // console.dir(mongoose.Types.ObjectId(uid));
+
+    BossRun.find( { participants: { $in: charIds } } )    
+        .then(response => {
+            res.json({
+                bossruns: response
+            })
+        })
+        .catch(err => {
+            res.json({
+                err: "A server error has occured"
+            })
+        })
 })
 
 module.exports = router;

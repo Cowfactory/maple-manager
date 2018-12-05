@@ -14,13 +14,24 @@ class AccountPage extends Component {
     /*--- Lifecycle Methods ---*/
     // Load the character list via API call on-load
     componentDidMount() {
-        axios.get(`/api/users/${this.props.user._id}/characters`)
-            .then(characters => {
-                this.setState({ characters })
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        let charIds = this.props.user.characters.map(c => c._id)
+
+        Promise.all([
+            axios.get(`/api/users/${this.props.user._id}/characters`),
+            axios.request(`/api/bossruns`, {
+                method: 'get',
+                params: { charIds: charIds }
+            }) 
+        ])
+        .then(responses => {
+            let characters = responses[0].data;
+            let bossruns = responses[1].data;
+            console.log(characters)
+            console.log(bossruns);
+
+            this.setState({ characters })
+        })
+        .catch(err => { console.log(err) })
     }
 
 

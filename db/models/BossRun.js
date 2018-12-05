@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const raidSchema = new mongoose.Schema({
+const bossRunSchema = new mongoose.Schema({
     organizer_id: {
         required: [true, 'A raid organizer is required'],
         type: mongoose.Schema.Types.ObjectId, ref: 'Character'
@@ -29,6 +29,6 @@ const raidSchema = new mongoose.Schema({
     timestamps: true
 })
 
-const Raid = mongoose.model('Raid', raidSchema);
+const BossRun = mongoose.model('BossRun', bossRunSchema);
 
-module.exports = Raid;
+module.exports = BossRun;
