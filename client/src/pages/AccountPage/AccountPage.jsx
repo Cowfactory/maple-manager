@@ -35,9 +35,11 @@ class AccountPage extends Component {
 
 
     /*--- Callback functions ---*/
-    deleteCharacter = (e) => {
+    deleteCharacter = (id) => {
         // check where character state should be
-        console.log("test delte character");
+        axios.delete(`/api/users/${this.props.user._id}/character/${id}`)
+            .then(this.componentDidMount())
+            .catch(err => console.log(err));
     }
 
     render() {
@@ -48,7 +50,7 @@ class AccountPage extends Component {
                     <div className={styles.left}>
                         <h1>My Runs</h1>
                         <hr />
-                        <BossrunList 
+                        <BossrunList
                             charIds={this.state.charIds}
                         />
                     </div>
@@ -59,7 +61,7 @@ class AccountPage extends Component {
                             user={this.props.user}
                             deleteCharacter={this.deleteCharacter}
                             forceFetch={this.forceFetch}
-                        /> 
+                        />
                     </div>
                 </div>
             </>

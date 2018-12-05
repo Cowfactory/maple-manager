@@ -30,6 +30,18 @@ router.get('/:id/characters', (req, res) => {
         })
 });
 
+router.delete('/:id/character/:cid', (req, res) => {
+    User.findByIdAndUpdate(req.params.id, {
+        $pull: {
+            _id: req.params.cid
+        }
+    })
+    .catch(err => {
+        res.send("error occurred")
+    })
+    
+})
+
 // Add a character to user
 router.post('/:id/characters', (req, res) => {
     // find the user
