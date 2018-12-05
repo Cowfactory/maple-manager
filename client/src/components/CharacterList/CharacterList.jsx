@@ -3,6 +3,7 @@ import CharacterDetail from '../CharacterDetail/CharacterDetail';
 import CharacterCreateForm from '../CharacterCreateForm/CharacterCreateForm';
 import styles from './CharacterList.module.css';
 
+
 class CharacterList extends Component {
     constructor(props) {
         super(props);

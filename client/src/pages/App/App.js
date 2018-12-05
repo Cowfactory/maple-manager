@@ -39,7 +39,7 @@ class App extends Component {
                 <Router>
                     <Switch>
                         <Route exact path='/' render={() =>
-                            <MainPage 
+                            <MainPage
                                 NavBar={nav}
                             />
                         } />
@@ -57,38 +57,33 @@ class App extends Component {
                         } />
                         <Route path='/account' render={() => (
                             this.state.user ?
-                                <AccountPage 
+                                <AccountPage
                                     NavBar={nav}
                                     user={this.state.user}
                                 /> :
                                 <Redirect to='/login' />
                         )} />
                         <Route path='/groups' render={() => (
-                            <RaidGroupsPage 
+                            <RaidGroupsPage
                                 NavBar={nav}
                                 user={this.state.user}
                             />
                         )} />
                         <Route path='/createRaid' render={(props) => {
                             let bossName = props.location.state ? props.location.state.bossName : null
-                            // return this.state.user ?
-                            //     <CreateRaidPage 
-                            //         NavBar={nav}
-                            //         user={this.state.user}
-                            //         bossName={bossName}
-                            //     /> :
-                            //     <Redirect to='/login' />
-                            return <CreateRaidPage 
+                            return this.state.user ?
+                                <CreateRaidPage
                                     NavBar={nav}
                                     user={this.state.user}
                                     bossName={bossName}
-                                />
+                                /> :
+                                <Redirect to='/login' />
                         }} />
-                        <Route exact path='/404' render={() => 
-                            <NoMatchPage 
+                        <Route exact path='/404' render={() =>
+                            <NoMatchPage
                                 NavBar={nav}
-                            /> 
-                        }/>
+                            />
+                        } />
                         <Route render={() => <Redirect to='/404' />} />
                     </Switch>
                 </Router>
@@ -100,9 +95,9 @@ class App extends Component {
     handleSomeClick = (e) => {
         //Hello
     }
-    
+
     deleteCharacter = (e) => {
-        
+
     }
 
     handleLoginOrSignup = (data) => {
@@ -119,7 +114,7 @@ class App extends Component {
     setUserStateFromLocalToken = async () => {
         try {
             let result = await tokenService.authMeFromLocalToken();
-            if(result) {
+            if (result) {
                 // Token found; lift to state
                 this.setState({
                     token: result.token,
@@ -132,7 +127,7 @@ class App extends Component {
                     user: null
                 });
             }
-        } catch(err) {
+        } catch (err) {
             // Authentication challenge failed; reset state + include error msg
             console.log("auth challenge failed");
             this.setState({

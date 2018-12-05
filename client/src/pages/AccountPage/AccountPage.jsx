@@ -44,12 +44,14 @@ class AccountPage extends Component {
                 <div className={styles.AccountPage}>
                     <div className={styles.left}>
                         <h1>My Runs</h1>
+                        <hr />
                         <BossrunList 
                             charIds={this.state.charIds}
                         />
                     </div>
                     <div className={styles.right}>
                         <h1>My Characters</h1>
+                        <hr />
                         <CharacterList
                             user={this.props.user}
                             deleteCharacter={this.deleteCharacter}

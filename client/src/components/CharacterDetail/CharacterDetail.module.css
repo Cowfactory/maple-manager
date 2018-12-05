@@ -4,13 +4,17 @@
     align-content: center;
     justify-content: space-between;
     border: 1px dotted black;  
+    width: 100%;
 }
 .detailSegment {
+    display: flex;
+    width: 25%;
+    align-content: center;
+    justify-content: space-between;
 
 }
 
 .stackedDetail {
-    border: 1px dotted blue;
     display: flex;
     flex-direction: column;
 }

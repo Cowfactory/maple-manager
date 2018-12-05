@@ -25,7 +25,7 @@ class BossrunList extends Component {
     }
 
     render() {
-        console.log(this.state.bossruns)
+        // console.log(this.state.bossruns)
         let list = (this.state.bossruns.length) ?
             <>
                 {this.state.bossruns.map((run, idx) => (
