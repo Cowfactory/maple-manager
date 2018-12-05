@@ -11,22 +11,22 @@ const CharacterDetail = ({character, deleteCharacter}) => {
     var jobImg;
     switch(character.class) {
         case "Bow Master": case "Marksman":
-            jobImg = {bowman};
+            jobImg = bowman;
             break;
         case "Arch Mage (I/L)": case "Arch Mage (F/P)": case "Bishop":
-            jobImg = {magician};
+            jobImg = magician;
             break;  
         case "Buccaneer": case "Corsair":
-            jobImg = {pirate};
+            jobImg = pirate;
             break;  
         case "Night Lord": case "Shadower":
-            jobImg = {thief};
+            jobImg = thief;
             break; 
         case "Hero": case "Paladin": case "Dark Knight":
-            jobImg = {warrior};
+            jobImg = warrior;
             break; 
         default:
-            jobImg = {all};
+            jobImg = all;
             break; 
     }
 
