@@ -57,30 +57,32 @@ class LoginPage extends Component {
         if (this.state.redirectToHome) return <Redirect to="/" />
         let errorPanel = (this.state.error) ? <ErrorPanel error={this.state.error} /> : ''
         return (
-            <div className="LoginPage">
+            <>
                 {this.props.NavBar}
-                <h3>Log in:</h3>
-                {errorPanel}
-                <form onSubmit={this.handleSubmit}>
-                    <div className={styles.inputBox}>
-                        <div className={styles.leftCol}>
-                            <label htmlFor="l-email">Email:</label>
+                <div className={styles.LoginPage}>
+                    <h2>Log in:</h2>
+                    {errorPanel}
+                    <form onSubmit={this.handleSubmit}>
+                        <div className={styles.inputBox}>
+                            <div className={styles.leftCol}>
+                                <label htmlFor="l-email">Email:</label>
+                            </div>
+                            <div className={styles.rightCol}>
+                                <input name="l-email" type='email' value={this.state.email} onChange={this.handleEmailChange} />
+                            </div>
                         </div>
-                        <div className={styles.rightCol}>
-                            <input name="l-email" type='email' value={this.state.email} onChange={this.handleEmailChange} />
+                        <div className={styles.inputBox}>
+                            <div className={styles.leftCol}>
+                                <label htmlFor="l-password">Password:</label>
+                            </div>
+                            <div className={styles.rightCol}>
+                                <input name="l-password" type='password' value={this.state.password} onChange={this.handlePasswordChange} />
+                            </div>
                         </div>
-                    </div>
-                    <div className={styles.inputBox}>
-                        <div className={styles.leftCol}>
-                            <label htmlFor="l-password">Password:</label>
-                        </div>
-                        <div className={styles.rightCol}>
-                            <input name="l-password" type='password' value={this.state.password} onChange={this.handlePasswordChange} />
-                        </div>
-                    </div>
-                    <input type="submit" value='Log In!' />
-                </form>
-            </div>
+                        <input type="submit" value='Log In!' />
+                    </form>
+                </div>
+            </>
         )
     }
 }

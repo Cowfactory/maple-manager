@@ -1,9 +1,10 @@
-.Login {
+.LoginPage {
     display: inline-block;
     width: 25vw;
-    background-color: lightgreen;
+    background-color: #57A0D3;
     padding: 1rem;
     margin: 1rem;
+    margin-top: 3%;
 }
   
 .inputBox {

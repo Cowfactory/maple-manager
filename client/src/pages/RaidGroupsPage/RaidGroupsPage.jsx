@@ -21,8 +21,7 @@ class RaidGroupsPage extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         if(!this.props.user) {
-            console.log("No user!");
-            //
+            this.setState({ error: "Please Log in first!"});
         } else {
             axios.post('/api/raidgroups', {
                 name: this.state.groupNameVal,
@@ -34,7 +33,7 @@ class RaidGroupsPage extends Component {
                     this.setState({ groupNameVal: "" })
                     this.setState({ error: null })
                 } else {
-                    this.setState({ error: response.data.message });
+                    this.setState({ error: "Failed to add group" });
                 }
             })
         }
@@ -68,8 +67,8 @@ class RaidGroupsPage extends Component {
                         {this.state.groups.length ?
                             <div>
                                 {this.state.groups.map((group, idx) => (
-                                    <div key={idx}>
-                                        {group.name}
+                                    <div key={idx} className={styles.groupListing}>
+                                        {group.name} - Raids Completed: {group.raids.length}
                                     </div>
                                 ))}
                             </div>
@@ -80,7 +79,7 @@ class RaidGroupsPage extends Component {
                     <div className={styles.right}>
                         <h1>Create a Group!</h1>
                         <hr />
-                        <form onSubmit={this.handleSubmit}>
+                        <form className={styles.input} onSubmit={this.handleSubmit}>
                             <div>
                                 <label htmlFor="group-name">Group Name: </label>
                                 <input name="group-name" type="text" value={this.state.groupNameVal}

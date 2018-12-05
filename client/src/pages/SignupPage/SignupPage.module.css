@@ -1,9 +1,10 @@
-.Signup {
+.SignupPage {
     display: inline-block;
     width: 25vw;
-    background-color: yellow;
+    background-color: #57A0D3;
     padding: 1rem;
     margin: 1rem;
+    margin-top: 3%;
 }
   
 .inputBox {
@@ -24,15 +25,14 @@
     width: 35%;
 }
   
-/* li {
-    margin: 0.1em;
-    padding: 0.1em;
-} */
-  
 .red {
     background-color: Tomato;
 }
   
 .green {
     background-color: YellowGreen;
+}
+
+li {
+    list-style-type: none;
 }

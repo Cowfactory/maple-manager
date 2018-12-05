@@ -24,56 +24,22 @@ class SignupPage extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    handleNameChange(e) {
-        this.setState({
-            name: e.target.value
-        })
-    }
-    handleEmailChange(e) {
-        this.setState({
-            email: e.target.value
-        })
-    }
+    handleNameChange(e) { this.setState({ name: e.target.value }) }
+    handleEmailChange(e) { this.setState({ email: e.target.value }) }
     handlePasswordChange(e) {
-        if (e.target.value.match(/[A-Z]/g)) {
-            this.setState({
-                passHasCap: true
-            })
-        } else {
-            this.setState({
-                passHasCap: false
-            })
-        }
-        if (e.target.value.match(/[a-z]/g)) {
-            this.setState({
-                passHasLow: true
-            })
-        } else {
-            this.setState({
-                passHasLow: false
-            })
-        }
-        if (e.target.value.match(/\d/g)) {
-            this.setState({
-                passHasDig: true
-            })
-        } else {
-            this.setState({
-                passHasDig: false
-            })
-        }
-        if (e.target.value.match(/[.,/#!$%^&*;:{}=\-_`~()]/g)) {
-            this.setState({
-                passHasPunc: true
-            })
-        } else {
-            this.setState({
-                passHasPunc: false
-            })
-        }
-        this.setState({
-            password: e.target.value
-        })
+        if (e.target.value.match(/[A-Z]/g)) this.setState({ passHasCap: true }) 
+        else this.setState({ passHasCap: false })
+
+        if (e.target.value.match(/[a-z]/g)) this.setState({ passHasLow: true })
+        else this.setState({ passHasLow: false })
+        
+        if (e.target.value.match(/\d/g)) this.setState({ passHasDig: true })
+        else this.setState({ passHasDig: false })
+        
+        if (e.target.value.match(/[.,/#!$%^&*;:{}=\-_`~()]/g)) this.setState({ passHasPunc: true })
+        else this.setState({ passHasPunc: false })
+        
+        this.setState({ password: e.target.value })
     }
 
     handleSubmit(e) {
@@ -147,48 +113,52 @@ class SignupPage extends Component {
         
         let errorPanel = (this.state.error) ? <ErrorPanel error={this.state.error} /> : ''
         return (
-            <div className={styles.SignupPage}>
+            <>
                 {this.props.NavBar}  
-                <h3>Create a new account:</h3>
-                {errorPanel}
-                <form onSubmit={this.handleSubmit}>
-                    <div className={styles.inputBox}>
-                        <div className={styles.leftCol}>
-                            <label htmlFor="s-name">Username:</label>
+                <div className={styles.SignupPage}>
+                    <h2>Create a new account:</h2>
+                    <hr />
+                    {errorPanel}
+                    <form onSubmit={this.handleSubmit}>
+                        <div className={styles.inputBox}>
+                            <div className={styles.leftCol}>
+                                <label htmlFor="s-name">Username:</label>
+                            </div>
+                            <div className={styles.rightCol}>
+                                <input name="s-name" type='text' value={this.state.name} onChange={this.handleNameChange} />
+                            </div>
                         </div>
-                        <div className={styles.rightCol}>
-                            <input name="s-name" type='text' value={this.state.name} onChange={this.handleNameChange} />
+                        <div className={styles.inputBox}>
+                            <div className={styles.leftCol}>
+                                <label htmlFor="s-email">Email:</label>
+                            </div>
+                            <div className={styles.rightCol}>
+                                <input name="s-email" type='email' value={this.state.email} onChange={this.handleEmailChange} />
+                            </div>
                         </div>
-                    </div>
-                    <div className={styles.inputBox}>
-                        <div className={styles.leftCol}>
-                            <label htmlFor="s-email">Email:</label>
+                        <div className={styles.inputBox}>
+                            <div className={styles.leftCol}>
+                                <label htmlFor="s-password">Password:</label>
+                            </div>
+                            <div className={styles.rightCol}>
+                                <input name="s-password" type='password' value={this.state.password} onChange={this.handlePasswordChange} />
+                            </div>
                         </div>
-                        <div className={styles.rightCol}>
-                            <input name="s-email" type='email' value={this.state.email} onChange={this.handleEmailChange} />
+                        <div>
+                            <hr />
+                            <p>Password must meet these requirements:</p>
+                            <ul>
+                                <li className={(this.state.password.length > 9 && this.state.password.length < 129) ? "green" : "red"}>Length (10 to 128): {this.state.password.length}</li>
+                                <li className={(this.state.passHasCap) ? "green" : "red"}>Contain 1+ uppercase letter (A-Z)</li>
+                                <li className={(this.state.passHasLow) ? "green" : "red"}>Contain 1+ lowercase letter (a-z)</li>
+                                <li className={(this.state.passHasDig) ? "green" : "red"}>Contain 1+ digit (0-9)</li>
+                                <li className={(this.state.passHasPunc) ? "green" : "red"}>Contain 1+ special character (punctuation)</li>
+                            </ul>
                         </div>
-                    </div>
-                    <div className={styles.inputBox}>
-                        <div className={styles.leftCol}>
-                            <label htmlFor="s-password">Password:</label>
-                        </div>
-                        <div className={styles.rightCol}>
-                            <input name="s-password" type='password' value={this.state.password} onChange={this.handlePasswordChange} />
-                        </div>
-                    </div>
-                    <div>
-                        <p>Password must meet these requirements:</p>
-                        <ul>
-                            <li className={(this.state.password.length > 9 && this.state.password.length < 129) ? "green" : "red"}>Length (10 to 128): {this.state.password.length}</li>
-                            <li className={(this.state.passHasCap) ? "green" : "red"}>Contain 1+ uppercase letter (A-Z)</li>
-                            <li className={(this.state.passHasLow) ? "green" : "red"}>Contain 1+ lowercase letter (a-z)</li>
-                            <li className={(this.state.passHasDig) ? "green" : "red"}>Contain 1+ digit (0-9)</li>
-                            <li className={(this.state.passHasPunc) ? "green" : "red"}>Contain 1+ special character (punctuation)</li>
-                        </ul>
-                    </div>
-                    <input type='submit' value='Sign Up!' />
-                </form>
-            </div>
+                        <input type='submit' value='Sign Up!' />
+                    </form>
+                </div>
+            </>
         )
     }
 }

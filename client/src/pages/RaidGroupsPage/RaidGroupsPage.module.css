@@ -25,3 +25,18 @@
 .right {
     margin-left: 1%
 }
+
+.groupListing {
+    width: 100%;
+    padding: 1px;
+    margin-top: 3%;
+    border: 1px dotted black;
+    background-color: #457EB4;
+    -moz-box-shadow:    4px 5px 8px 1px #457EB4;
+    -webkit-box-shadow: 4px 5px 8px 1px #457EB4;
+    box-shadow:         4px 5px 8px 1px #457EB4;
+}
+
+.input input {
+    margin-top: 3%;    
+}
