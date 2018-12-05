@@ -91,8 +91,8 @@ class RaidParticipationPanel extends Component {
     render() {
         let participantSelector =
             <div className={styles.participantSelector}>
-                <div>
-                    <label htmlFor="participants">Add by IGN:</label>
+                <div className={styles.segment}>
+                    <h3><label htmlFor="participants">Add by IGN:</label></h3>
                     <select name="participants"
                         onChange={this.handleSelectChange}
                         value={this.state._selectValue}>
@@ -105,8 +105,8 @@ class RaidParticipationPanel extends Component {
                     </select>
                     <button type="button" value='Add Participant' onClick={this.handleAddParticipant}>Add Participant</button>
                 </div>
-                <div>
-                    <label htmlFor="participants">Organizer:</label>
+                <div className={styles.segment}>
+                    <h3><label htmlFor="participants">Organizer:</label></h3>
                     <select name="organizer"
                         onChange={this.handleOrganizerChange}
                         value={this.state._select2Value}>
@@ -117,7 +117,7 @@ class RaidParticipationPanel extends Component {
                             </option>
                         ))}
                     </select>
-                    <button type="button" value='Add Organizer' onClick={this.handleAddOrganizer}>Add Organizer</button>
+                    <button type="button" value='Add Organizer' onClick={this.handleAddOrganizer}>Select Organizer</button>
                 </div>
             </div>
 

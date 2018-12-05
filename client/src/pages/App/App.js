@@ -71,13 +71,18 @@ class App extends Component {
                         )} />
                         <Route path='/createRaid' render={(props) => {
                             let bossName = props.location.state ? props.location.state.bossName : null
-                            return this.state.user ?
-                                <CreateRaidPage 
+                            // return this.state.user ?
+                            //     <CreateRaidPage 
+                            //         NavBar={nav}
+                            //         user={this.state.user}
+                            //         bossName={bossName}
+                            //     /> :
+                            //     <Redirect to='/login' />
+                            return <CreateRaidPage 
                                     NavBar={nav}
                                     user={this.state.user}
                                     bossName={bossName}
-                                /> :
-                                <Redirect to='/login' />
+                                />
                         }} />
                         <Route exact path='/404' render={() => 
                             <NoMatchPage 

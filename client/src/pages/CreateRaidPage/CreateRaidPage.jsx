@@ -5,6 +5,7 @@ import Calendar from '../../components/Calendar/Calendar';
 import styles from './CreateRaidPage.module.css';
 import RaidParticipationPanel from '../../components/RaidParticipationPanel/RaidParticipationPanel';
 import RaidGroupsPanel from '../../components/RaidGroupsPanel/RaidGroupsPanel';
+import bgImg from '../../img/bg/ht_bg.png';
 
 
 class CreateRaidPage extends Component {
@@ -34,16 +35,16 @@ class CreateRaidPage extends Component {
         };
 
         let errArr = [];
-        if(data.participants.length === 0) errArr.push("Missing participants");
-        if(!data.boss) errArr.push("Missing Boss");
-        if(!data.date) errArr.push("Missing Date");
-        if(!data.organizer) errArr.push("Add an organizer!");        
+        if (data.participants.length === 0) errArr.push("Missing participants");
+        if (!data.boss) errArr.push("Missing Boss");
+        if (!data.date) errArr.push("Missing Date");
+        if (!data.organizer) errArr.push("Add an organizer!");
 
         this.setState({ errArr: errArr });
-        if(errArr.length === 0) {
+        if (errArr.length === 0) {
             axios.post('/api/bossruns', data)
-                .then(response => { 
-                    console.log(response) 
+                .then(response => {
+                    console.log(response)
                     this.setState({ redirectToAccount: true })
                 })
                 .catch(err => { console.log(err) })
@@ -59,75 +60,95 @@ class CreateRaidPage extends Component {
     render() {
         if (this.state.redirectToAccount) return <Redirect to="/account" />
 
-        let title = (this.props.bossName) ? <h1>{this.props.bossName}</h1> : <h1>Custom Boss</h1>
+        let title = (this.props.bossName) ? <h2>{this.props.bossName}</h2> : <h2>Custom Boss</h2>
         let display =
-            <div className={styles.left}>
-                {this.state.activeGroup
-                    ? <h3>{this.state.activeGroup.name}'s {this.state.boss} Run</h3>
-                    : <h3>{this.state.boss} Run</h3>
-                }
-                {this.state.date
-                    ? <h3>On: {this.state.date}</h3>
-                    : <h3>On: TBD</h3>
-                }
-                {this.state.organizer
-                    ? <h3>Organizer: {this.state.organizer.ign} </h3>
-                    : <h3>Organizer: None</h3>
-                }
-                {!this.state.group ?
-                    <h3>No Group!</h3> : ""
-                }
-                {this.state.raidParticipants.length ?  
+            <div className={styles.inner}>
+                <div className={styles.horizontalFlex}>
+                    <div>
+                        {this.state.activeGroup
+                            ? <h2>{this.state.activeGroup.name}'s Run</h2>
+                            : <h2>Groupless Run</h2>
+                        }
+                        {this.state.date
+                            ? <h5>On: {this.state.date}</h5>
+                            : <h5>On: TBD</h5>
+                        }
+                    </div>
+                    <div>
+                        {this.state.organizer ?
+                            <div className={styles.vertFlex}>
+                                <h2>Organizer:</h2>
+                                <h5>{this.state.organizer.ign}</h5>
+                            </div>
+                            :
+                            <div className={styles.vertFlex}>
+                                <h2>Organizer:</h2>
+                                <h5>None</h5>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <br />
+                <h3>Participants:</h3>
+                {this.state.raidParticipants.length ?
                     <>
-                        <h3>Participants:</h3>
-                        <ul>
+                        <ul className={styles.vertFlex}>
                             {this.state.raidParticipants.map((u, idx) => (
-                                <ul key={idx}>{u.ign} - Lvl. {u.level} {u.class}</ul>
+                                <ul key={idx} className={styles.raider}>{u.ign} - Lvl. {u.level} {u.class}</ul>
                             ))}
                         </ul>
                     </>
-                    : <h3>Participants: None</h3>
+                    : <h5>None</h5>
                 }
             </div>
-
+        let bg = {
+            background: `url(${bgImg})`,
+            backgroundSize: 'cover'
+        }
         return (
-            <>
+            <div className={styles.bg} style={bg}>
                 {this.props.NavBar}
-                {title}
+                {/* {title} */}
                 <div className={styles.CreateRaidPage}>
 
                     <div className={styles.left}>
+                        {title}
+                        <hr />
                         {display}
+                        <form className={styles.form}>
+                            <h3>SUBMIT!</h3>
+                            <button type="button" value="Submit" onClick={this.handleSubmit}>Submit</button>
+                            <div>
+                                {this.state.errArr.map((msg, idx) => <p key={idx}>{msg}</p>)}
+                            </div>
+                        </form>
                     </div>
 
                     <div className={styles.right}>
-                        <div className={styles.rightPanel}>
-                            <RaidParticipationPanel
-                                liftParticipantsToState={this.handleAddParticpant}
-                                liftOrganizerToState={this.handleAddOrganizer}
-                            />
-                        </div>
-                        <div className={styles.rightPanel}>
-                            <RaidGroupsPanel
-                                liftActiveGroupToState={this.handleActiveGroupChange}
-                            />
-                        </div>
-                        <div className={styles.rightPanel}>
-                            <Calendar
-                                liftDateToState={this.handleDateChange}
-                            />
+                        <h2>Run Controls</h2>
+                        <hr />
+                        <div className={styles.inner}>
+                            <div className={styles.vertFlex}>
+                                <RaidParticipationPanel
+                                    liftParticipantsToState={this.handleAddParticpant}
+                                    liftOrganizerToState={this.handleAddOrganizer}
+                                />
+                            </div>
+                            <div>
+                                <RaidGroupsPanel
+                                    liftActiveGroupToState={this.handleActiveGroupChange}
+                                />
+                            </div>
+                            <div className={styles.vertFlex}>
+                                <Calendar
+                                    liftDateToState={this.handleDateChange}
+                                />
+                            </div>
                         </div>
                     </div>
 
                 </div>
-                <form>
-                    <h3>SUBMIT!</h3>
-                    <button type="button" value="Submit" onClick={this.handleSubmit}>Submit</button>
-                    <div>
-                        {this.state.errArr.map((msg, idx) => <p key={idx}>{msg}</p> )}
-                    </div>
-                </form>
-            </>
+            </div>
         )
     }
 }

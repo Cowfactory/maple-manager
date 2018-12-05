@@ -10,6 +10,7 @@ const mUIStyles = theme => ({
         flexWrap: 'wrap',
     },
     textField: {
+        fontWeight: 800,
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
         width: 220,

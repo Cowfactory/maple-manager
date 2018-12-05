@@ -6,12 +6,17 @@
     display: flex;
     flex-direction: column;
     align-content: flex-start;
+
+}
+
+.groupSelector h3{
+    margin-bottom: 5px;
+}
+.groupSelector {
+    margin-bottom: 10px;
 }
 
 .submitBtn {
     width: 25%;
     display: inline-block;
-}
-.groupDisplay {
-    
 }

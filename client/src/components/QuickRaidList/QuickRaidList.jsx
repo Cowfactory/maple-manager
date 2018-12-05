@@ -19,7 +19,7 @@ const QuickRaidList = (props) => (
             <div className={styles.subSegment}>
                 <Link className={styles.textSegment} to={{ pathname: '/createRaid', state: {bossName: 'Horntail'} }} >
                     <b>New Run</b>
-                    <img src={signImg} className={styles.signImg}></img>
+                    <img src={signImg} className={styles.signImg} alt="signpost"></img>
                 </Link>
             </div>
         </div>
@@ -34,7 +34,7 @@ const QuickRaidList = (props) => (
             <div className={styles.subSegment}>
                 <Link className={styles.textSegment} to={{ pathname: '/createRaid', state: {bossName: 'Zakum'} }} > 
                     <b>New Run</b>
-                    <img src={signImg} className={styles.signImg}></img>
+                    <img src={signImg} className={styles.signImg} alt="signpost"></img>
                 </Link>
             </div>
         </div>
@@ -49,7 +49,7 @@ const QuickRaidList = (props) => (
             <div className={styles.subSegment}>
                 <Link className={styles.textSegment} to="/createRaid">
                     <b>New Run</b>
-                    <img src={signImg} className={styles.signImg}></img>
+                    <img src={signImg} className={styles.signImg} alt="signpost"></img>
                 </Link>
             </div>
         </div>
