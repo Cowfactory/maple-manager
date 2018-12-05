@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Calendar from '../../components/Calendar/Calendar';
 import styles from './CreateRaidPage.module.css';
 import RaidParticipationPanel from '../../components/RaidParticipationPanel/RaidParticipationPanel';
 import RaidGroupsPanel from '../../components/RaidGroupsPanel/RaidGroupsPanel';
+
 
 class CreateRaidPage extends Component {
     constructor(props) {
@@ -14,7 +16,9 @@ class CreateRaidPage extends Component {
             loot: [],
             boss: this.props.bossName || 'Zakum',
             date: null,
-            organizer: null
+            organizer: null,
+            errArr: [],
+            redirectToAccount: false
         }
     }
 
@@ -29,9 +33,21 @@ class CreateRaidPage extends Component {
             organizer: this.state.organizer
         };
 
-        axios.post('/api/bossruns', data)
-            .then(response => { console.log(response) })
-            .catch(err => { console.log(err) })
+        let errArr = [];
+        if(data.participants.length === 0) errArr.push("Missing participants");
+        if(!data.boss) errArr.push("Missing Boss");
+        if(!data.date) errArr.push("Missing Date");
+        if(!data.organizer) errArr.push("Add an organizer!");        
+
+        this.setState({ errArr: errArr });
+        if(errArr.length === 0) {
+            axios.post('/api/bossruns', data)
+                .then(response => { 
+                    // console.log(response) 
+                    this.setState({ redirectToAccount: true })
+                })
+                .catch(err => { console.log(err) })
+        }
     }
 
     handleDateChange = (date) => { this.setState({ date: date }) }
@@ -41,6 +57,8 @@ class CreateRaidPage extends Component {
     handleAddOrganizer = (character) => { this.setState({ organizer: character }) }
 
     render() {
+        if (this.state.redirectToAccount) return <Redirect to="/account" />
+
         let title = (this.props.bossName) ? <h1>{this.props.bossName}</h1> : <h1>Custom Boss</h1>
         let display =
             <div className={styles.left}>
@@ -48,13 +66,16 @@ class CreateRaidPage extends Component {
                     ? <h3>{this.state.activeGroup.name}'s {this.state.boss} Run</h3>
                     : <h3>{this.state.boss} Run</h3>
                 }
+                {this.state.date
+                    ? <h3>On: {this.state.date}</h3>
+                    : <h3>On: TBD</h3>
+                }
                 {this.state.organizer
                     ? <h3>Organizer: {this.state.organizer.ign} </h3>
                     : <h3>Organizer: None</h3>
                 }
-                {this.state.date
-                    ? <h3>On: {this.state.date}</h3>
-                    : <h3>On: TBD</h3>
+                {!this.state.group ?
+                    <h3>No Group!</h3> : ""
                 }
                 {this.state.raidParticipants.length ?  
                     <>
@@ -102,6 +123,9 @@ class CreateRaidPage extends Component {
                 <form>
                     <h3>SUBMIT!</h3>
                     <button type="button" value="Submit" onClick={this.handleSubmit}>Submit</button>
+                    <div>
+                        {this.state.errArr.map((msg, idx) => <p key={idx}>{msg}</p> )}
+                    </div>
                 </form>
             </>
         )
