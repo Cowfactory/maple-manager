@@ -36,18 +36,21 @@ class RaidGroupsPanel extends Component {
     handleGroupSelect = (e) => {
         // On the initial click - _selectVal won't be set yet (null)
         if (!this.state._selectVal) {
+            // if no selection
             let val = this.state.allRaidGroups[0];
-            let str = JSON.stringify(this.state.allRaidGroups[0]);
+            let str = JSON.stringify(val);
             this.setState({
                 _selectVal: str,
                 selectedGroup: val
             })
-            this.props.liftActiveGroupToState(JSON.parse(this.state._selectVal))
+            this.props.liftActiveGroupToState(val);
         } else {
+            // there is a user-selected _value
+            let val = JSON.parse(this.state._selectVal);
             this.setState({
-                selectedGroup: JSON.parse(this.state._selectVal)
+                selectedGroup: val
             })
-            this.props.liftActiveGroupToState(JSON.parse(this.state._selectVal))
+            this.props.liftActiveGroupToState(val)
         }
     }
 

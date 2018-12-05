@@ -3,13 +3,19 @@ const router = express.Router();
 const BossRun = require("../../db/models/BossRun");
 
 router.post('/', (req, res) => {
-    // let data = {
-    //     participants: req.body.participants,
-    //     group: req.body.group,
-    //     loot: req.body.loot,
-    //     boss: req.body.boss,
-    //     date: req.body.date
-    // }
+    let lootIds = req.body.loot.map(loot => loot._id);
+    let participantIds = req.body.participants.map(p => p._id);
+
+    let data = {
+        organizer_id: req.body.organizer._id,
+        loots: lootIds,
+        participants: participantsIds,
+        date: req.body.date,
+        boss: req.body.boss,
+        group: req.body.group._id,        
+    }
+    console.log(data);
+
     // BossRun.create({
     //     organizer_ign: {
 

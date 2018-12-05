@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
 const raidSchema = new mongoose.Schema({
-    organizer_ign: {
+    organizer_id: {
         required: [true, 'A raid organizer is required'],
         type: mongoose.Schema.Types.ObjectId, ref: 'Character'
     },
-    commonlyFoundLoots: [
-        {type: mongoose.Schema.Types.ObjectId, ref: 'Loot'}
-    ],
+    group_id: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'RaidGroup'
+    },
     loots: [
         {type: mongoose.Schema.Types.ObjectId, ref: 'Loot'}
     ],
@@ -17,7 +17,14 @@ const raidSchema = new mongoose.Schema({
     date: {
         type: String,
         required: [true, 'A date is required']
-    }
+    },
+    boss: {
+        type: String,
+        required: [true, 'A Boss is required']
+    },
+    commonlyFoundLoots: [
+        {type: mongoose.Schema.Types.ObjectId, ref: 'Loot'}
+    ],
 }, {
     timestamps: true
 })

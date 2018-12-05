@@ -25,7 +25,8 @@ class CreateRaidPage extends Component {
             group: this.state.activeGroup,
             loot: this.state.loot,
             boss: this.state.boss,
-            date: this.state.date
+            date: this.state.date,
+            organizer: this.state.organizer
         };
 
         axios.post('/api/bossruns', data)
@@ -37,7 +38,7 @@ class CreateRaidPage extends Component {
     handleActiveGroupChange = (group) => { this.setState({ activeGroup: group }) }
     handleBossChange = (e) => { this.setState({ boss: e.target.value }) }
     handleAddParticpant = (arr) => { this.setState({ raidParticipants: arr }) }
-    handleAddOrganizer = (character) => { console.log(character); this.setState({ organizer: character }) }
+    handleAddOrganizer = (character) => { this.setState({ organizer: character }) }
 
     render() {
         let title = (this.props.bossName) ? <h1>{this.props.bossName}</h1> : <h1>Custom Boss</h1>
@@ -67,30 +68,6 @@ class CreateRaidPage extends Component {
                     : <h3>Participants: None</h3>
                 }
             </div>
-        // <div className={styles.left}>
-        //     <h2>
-        //         {this.state.activeGroup} ? 
-        //             {this.state.activeGroup.name}'s {this.state.boss} Run
-        //             
-        //     </h2>
-        //     <h3>
-        //         (this.state.date) ?
-        //             On: {this.state.date}
-        //             : "On: Date TBD"
-        //     </h3>
-        //     <h4>
-        //         (this.state.organizer) ? 
-        //             Organized By: {this.state.organizer.ign} </h4>
-        //             : "No Organizer"
-        //     <h3>Participants:</h3>
-        //         (this.state.raidParticipants) ? 
-        //             <ul>
-        //                 {this.state.raidParticipants.map((u, idx) => (
-        //                     <ul key={idx}>{u.ign} - Lvl. {u.level} {u.class}</ul>
-        //                 ))}
-        //             </ul>
-        //             : "None"
-        // </div>
 
         return (
             <>
