@@ -38,6 +38,7 @@ class CharacterList extends Component {
                         </button>
                         <CharacterCreateForm 
                             user={this.props.user}
+                            forceFetch={this.props.forceFetch}
                         />
 
                     </div>

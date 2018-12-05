@@ -34,7 +34,8 @@ class CharacterCreateForm extends Component {
             level: this.state.level
         }).then(result => {
             if(result.type === 'success') {
-                // // return <Redirect to='/account' />
+                this.props.forceFetch();
+                // return <Redirect to='/account' />
                 // this.props.history.push('/account')
 
                 // Nothing here for now.

@@ -29,6 +29,9 @@ class AccountPage extends Component {
 
     }
 
+    forceFetch = (e) => {
+        this.componentDidMount();
+    }
 
 
     /*--- Callback functions ---*/
@@ -55,6 +58,7 @@ class AccountPage extends Component {
                         <CharacterList
                             user={this.props.user}
                             deleteCharacter={this.deleteCharacter}
+                            forceFetch={this.forceFetch}
                         /> 
                     </div>
                 </div>
