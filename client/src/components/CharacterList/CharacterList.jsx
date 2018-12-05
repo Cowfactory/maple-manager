@@ -36,7 +36,9 @@ class CharacterList extends Component {
                         <button type="button" onClick={this.toggleFormVisible}>
                             Hide form
                         </button>
-                        <CharacterCreateForm />
+                        <CharacterCreateForm 
+                            user={this.props.user}
+                        />
 
                     </div>
                     :
