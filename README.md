@@ -18,7 +18,7 @@ MERN Stack
 * Mongoose
 
 
-## Work To Do:
+## Future Work:
 * Implement Raid update, to add items and edit details after the fact
 * Leaderboard - Track the highest achieving individuals and raid groups
 * Revamp Account page to show much more details in the Raid List
